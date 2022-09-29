@@ -1,0 +1,244 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Administrators
+		<small><!--  --></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a  ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a >Administrators</a></li>
+		<li class="active">admin_list</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Default box -->
+	<div class="box box-primary">
+
+		<div class="box-header with-border">
+			<h4>admin write</h4>
+			<!--  검색 영역 시작 -->
+			<div class="form-group">
+				<div class="form-row">
+					<div class="col-md-3">
+						<!--
+					  <input type="text" id="FILTER_ADMIN_NAME" name="FILTER_ADMIN_NAME" value="{FILTER_ADMIN_NAME}"  class="form-control" placeholder="Name">
+					   -->
+					</div>
+					<div class="col-md-9" style="text-align: right;">
+
+					</div>
+				</div>
+			</div>
+			<!--  검색 영역 끝 -->
+
+		</div>
+		<div class="box-body">
+
+
+			<form id="bbsWrite" name="bbsWrite">
+				<input type="hidden" class="form-control" id="admin_00_regdt" name="admin_00_regdt" value="{admin_00_regdt}" />
+				<input type="hidden" class="form-control" id="admin_00_moddt" name="admin_00_moddt" value="{admin_00_moddt}" />
+				<input type="hidden" class="form-control" id="admin_00_ip" name="admin_00_ip" value="{admin_00_ip}" />
+
+				<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+					<tbody>
+					<tr>
+						<th style="width:150px;"> ID 		</th>
+						<td><input type="text" class="form-control" id="admin_00_id" 		name="admin_00_id" 		value="{admin_00_id}"    	/> </td>
+					</tr>
+					<tr>
+						<th style="width:150px;"> Password 		</th>
+						<td><input type="password" class="form-control" id="admin_00_pw1" 		name="admin_00_pw1" 	value="{admin_00_pw1}"     /> </td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;"> Password check </th>
+						<td><input type="password" class="form-control" id="admin_00_pw2" 		name="admin_00_pw2" 	value="{admin_00_pw2}"     /> </td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;"> Name</th>
+						<td><input type="text" class="form-control" id="admin_00_name" 			name="admin_00_name" 			value="{admin_00_name}"           /> </td>
+					</tr>
+					<tr>
+						<th style="width:150px;"> E-Mail	</th>
+						<td><input type="text" class="form-control" id="admin_00_email" 			name="admin_00_email" 			value="{admin_00_email}"           /> </td>
+					</tr>
+					<tr>
+						<th style="width:150px;"> Mobile		</th>
+						<td><input type="text" class="form-control" id="admin_00_mobile" 			name="admin_00_mobile" 			value="{admin_00_mobile}"           /> </td>
+					</tr>
+
+					</tbody>
+				</table>
+			</form>
+
+
+			<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<tbody>
+				<tr>
+					<td style="text-align: right;">
+						<button id="btn_formSubmit" 	class="btn btn-primary">SUBMIT</button>
+<!--						<button id="btn_formReset" 		class="btn btn-primary">RESET</button>-->
+						<button id="btn_go_list" 		class="btn btn-primary">Go List</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- /.box-body -->
+		<div class="box-footer"><!-- nothing --></div>
+		<!-- /.box-footer-->
+	</div>
+	<!-- /.box -->
+
+</section>
+<!-- /.content -->
+
+<input type="hidden" id="url_go_list" value="{url_go_list}">
+<input type="hidden" id="url_go_submit" value="{url_go_submit}">
+<input type="hidden" id="url_go_view" value="{url_go_view}">
+
+<script src="js/jquery.form.js"></script>
+<script>
+	jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+			switch(this.id)
+			{
+				case "btn_go_list":				window.location.href	=	jQuery("#url_go_list").val();				break;
+				case "btn_formSubmit":			submitForm();															break;
+				case "btn_formReset":
+					if(confirm("The current page is initialized") == true)
+					{
+						window.location.reload( true );
+					}//	end if
+					break;
+			}//	end switch
+		}
+	);
+
+
+	function submitForm()
+	{
+
+		pageLoading();
+
+		var admin_00_id				=	jQuery("#admin_00_id").val();
+		var admin_00_pw1				=	jQuery("#admin_00_pw1").val();
+		var admin_00_pw2		=	jQuery("#admin_00_pw2").val();
+		var admin_00_name				=	jQuery("#admin_00_name").val();
+		var admin_00_email				=	jQuery("#admin_00_email").val();
+		var admin_00_mobile				=	jQuery("#admin_00_mobile").val();
+		var admin_00_regdt				=	jQuery("#admin_00_regdt").val();
+		var admin_00_moddt				=	jQuery("#admin_00_moddt").val();
+		var admin_00_ip				=	jQuery("#admin_00_ip").val();
+
+
+		var targetUrl	=	jQuery("#url_go_submit").val();
+
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"POST",
+			data:{
+
+				admin_00_id:admin_00_id
+				,admin_00_pw:admin_00_pw1
+				,admin_00_pw2:admin_00_pw2
+				,admin_00_name:admin_00_name
+				,admin_00_email:admin_00_email
+				,admin_00_mobile:admin_00_mobile
+				,admin_00_regdt:admin_00_regdt
+				,admin_00_moddt:admin_00_moddt
+				,admin_00_ip:admin_00_ip
+
+			},
+			dataType: "json",
+			success: function (rtn_arr)
+			{
+				PopupDiv_hidden();
+
+				//console.log( msg );dddds
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						//
+						case "validation":
+							alert(rtn_arr.msg);
+							jQuery("#"+rtn_arr.error_focus).focus();
+							break;
+						default:
+							//	실패
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+
+				}
+				else
+				{
+					var get_admin_00_pk = "/admin_00_pk/"+rtn_arr.SQL_Result_Data.admin_00_pk;
+					window.location.href	=	jQuery("#url_go_view").val()+get_admin_00_pk;
+				}//	end if
+
+			}
+		});
+
+		return false;
+
+	}//	end function
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	function ajaxFileUpload()
+	{
+
+		if( jQuery("#fileToUpload").val().trim().length == 0 )
+		{
+			alert("전송대상파일이 선택되지 않았습니다.");
+			return false;
+		}//	end if
+
+
+		var targetUrl	=	"/CI/index.php/Board_default/bbs_record_attachfile_proc";
+		jQuery("#fileWriteForm").ajaxSubmit(
+			{
+				url			: targetUrl,
+				type		: "post",
+				success		: function(data)
+				{
+					console.log( data );
+
+					var arrGetString	=	data.split("|");
+
+					//alert( arrGetString[0] + "----" + arrGetString[1] );
+
+					if( data.indexOf("SUCCESS") == -1 )
+					{
+						//	실패
+						alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+						location.reload();
+					}else{
+						var arrGetString	=	data.split("|");
+						CKEDITOR.instances.bbs31_textData.insertHtml( arrGetString[1] );
+					}//	end if
+
+					jQuery("#fileToUpload").val('');
+				}
+			}
+		);
+	}//	end function
+
+</script>
