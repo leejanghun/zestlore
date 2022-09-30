@@ -131,8 +131,8 @@ class Zest_common {
 		$smtp_confilg['useragent'] = 'SENDER';
 		$smtp_confilg['protocol'] = 'smtp';
 		$smtp_confilg['smtp_host'] = 'ssl://smtp.worksmobile.com';
-		$smtp_confilg['smtp_user'] = '';
-		$smtp_confilg['smtp_pass'] = '';
+		$smtp_confilg['smtp_user'] = 'ljh@theboms.co.kr';
+		$smtp_confilg['smtp_pass'] = 'zpdlqha21!$%';
 		$smtp_confilg['smtp_port'] = 465;
 		$smtp_confilg['smtp_timeout'] = 5;
 		$smtp_confilg['wordwrap'] = TRUE;
