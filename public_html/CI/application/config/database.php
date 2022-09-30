@@ -100,10 +100,10 @@ $db['default'] = array(
 // 가상머신
 $db['vmbox'] = array(
 	'dsn'	=> '',
-	'hostname' => '52.90.154.8',
-	'username' => 'palisades',
-	'password' => 'zpdlqha21!$%',
-	'database' => 'palisades',
+	'hostname' => '',
+	'username' => '',
+	'password' => '',
+	'database' => '',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
