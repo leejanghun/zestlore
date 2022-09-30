@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<base href="/CI/application/views/">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Log in</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Google Font -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+	<div class="login-logo">
+		<a href="../../index2.html"><b>Y</b>-Tool</a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">Sign in to start your session</p>
+
+		<form id="admin_login_write" name="admin_login_write">
+			<div class="form-group has-feedback">
+				<input type="text" id="werite_id" name="werite_id" class="form-control" placeholder="id">
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" id="werite_pw" name="werite_pw" class="form-control" placeholder="Password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row">
+
+				<div class="col-xs-8">
+					<!--
+				  <div class="checkbox icheck">
+					<label>
+					  <input type="checkbox"> Remember Me
+					</label>
+				  </div>
+				   -->
+				</div>
+
+				<!-- /.col -->
+				<div class="col-xs-4">
+					<button type="button" id="btn_admin_login_submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+		<!--
+		<div class="social-auth-links text-center">
+		  <p>- OR -</p>
+		  <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+			Facebook</a>
+		  <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+			Google+</a>
+		</div>
+		 -->
+		<!-- /.social-auth-links -->
+
+		<!--
+		<a href="#">I forgot my password</a><br>
+		<a href="register.html" class="text-center">Register a new membership</a>
+		 -->
+
+	</div>
+	<!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script>
+	$(function () {
+		$('input').iCheck({
+			checkboxClass: 'icheckbox_square-blue',
+			radioClass: 'iradio_square-blue',
+			increaseArea: '20%' /* optional */
+		});
+	});
+</script>
+<script>
+
+	jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+			switch(this.id)
+			{
+				case "btn_admin_login_submit":
+					console.log("try call function : submit_form_admin_login_write()");
+					submit_form_admin_login_write();
+					break;
+			}//	end switch
+		}
+	);
+
+
+
+	function submit_form_admin_login_write()
+	{
+		console.log("exec function : submit_form_admin_login_write()");
+		var submitExec	=	true;
+
+		var werite_id	=	jQuery.trim( jQuery("#werite_id").val() );
+		var werite_pw	=	jQuery.trim( jQuery("#werite_pw").val() );
+
+		console.log("werite_id-" + werite_id);
+		console.log("werite_pw-" + werite_pw);
+
+		if( ( werite_id.length == 0 )&&( submitExec == true ) )
+		{
+			alert("입력값 부정확 - 아이디");
+			jQuery("#werite_id").focus();
+			submitExec = false;
+		}//	end if
+
+		if( ( werite_id.length == 0 )&&( submitExec == true ) )
+		{
+			alert("입력값 부정확 - 비밀번호");
+			jQuery("#werite_pw").focus();
+			submitExec = false;
+		}//	end if
+
+		/*
+				if( ( werite_pw.length < 0 )&&( submitExec == true ) )
+				{
+					alert("입력값 부정확 - 비밀번호 8 자리 이상의 길이로 영문대소문자 숫자 특수문자를 혼용하여 작성하세요");
+					jQuery("#werite_pw").focus();
+					submitExec = false;
+				}//	end if
+
+				if( ( checkPasswordPattern(werite_pw) == false )&&( submitExec == true ) )
+				{
+					alert("입력값 부정확 - 비밀번호 8 자리 이상의 길이로 영문대소문자 숫자 특수문자를 혼용하여 작성하세요");
+					jQuery("#werite_pw").focus();
+					submitExec = false;
+				}//	end if
+			  */
+
+		if( submitExec == true )
+		{
+			var targetUrl   =   "/CI/index.php";
+			targetUrl   =   targetUrl + "/Admin_login/login_proc";
+
+			jQuery("#admin_login_write").attr('action', targetUrl);
+			jQuery("#admin_login_write").attr('method', 'post');
+			jQuery("#admin_login_write").submit();
+
+		}//	end if
+
+	}//	end function
+
+
+	function checkPasswordPattern(str)
+	{
+		var returnVal	=	true;
+		var checkPoint	=	0;
+		//	@	비밀번호 문자열에 숫자 존재 여부 검사
+		var pattern1 = /[0-9]/;	// 숫자
+		if( ( pattern1.test(str)==true )&&(returnVal == true) )
+		{
+			checkPoint	=	checkPoint + 1;
+		}//	end if
+
+		/*
+				//	@	비밀번호 문자열에 영문 소문자 존재 여부 검사
+				var pattern2 = /[a-z]/;
+				if( ( pattern2.test(str)==true )&&(returnVal == true) )
+				{
+					checkPoint	=	checkPoint + 1;
+				}//	end if
+
+
+				//	@	비밀번호 문자열에 영문 대문자 존재 여부 검사
+				var pattern3 = /[A-Z]/;
+				if( ( pattern3.test(str)==true )&&(returnVal == true) )
+				{
+					checkPoint	=	checkPoint + 1;
+				}//	end if
+
+				var pattern4 = /[~!@#$%^&*()_+|<>?:{}]/;	// 특수문자
+				if( ( pattern4.test(str)==true )&&(returnVal == true) )
+				{
+					checkPoint	=	checkPoint + 1;
+				}//	end if
+			  */
+
+		if( checkPoint < 3 )
+		{
+			returnVal	=	false;
+		}//	end if
+
+		return returnVal;
+	}//	end function
+
+
+
+
+
+
+</script>
+</body>
+</html>
+

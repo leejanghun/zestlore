@@ -1,0 +1,145 @@
+<div class="login-box">
+	<div class="login-logo">
+		<a href="../../index2.html"><b>Y</b>-Tool</a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">Sign in to start your session</p>
+
+		<form id="admin_login_write" name="admin_login_write">
+			<div class="form-group has-feedback">
+				<input type="text" id="werite_id" name="werite_id" class="form-control" placeholder="id">
+				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" id="werite_pw" name="werite_pw" class="form-control" placeholder="Password">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
+			<div class="row">
+
+				<div class="col-xs-8">
+					<!--
+				  <div class="checkbox icheck">
+					<label>
+					  <input type="checkbox"> Remember Me
+					</label>
+				  </div>
+				   -->
+				</div>
+
+				<!-- /.col -->
+				<div class="col-xs-4">
+					<button type="button" id="btn_go_submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+		<!--
+		<div class="social-auth-links text-center">
+		  <p>- OR -</p>
+		  <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+			Facebook</a>
+		  <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+			Google+</a>
+		</div>
+		 -->
+		<!-- /.social-auth-links -->
+
+		<!--
+		<a href="#">I forgot my password</a><br>
+		<a href="register.html" class="text-center">Register a new membership</a>
+		 -->
+
+	</div>
+	<!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+
+<input type="hidden" id="url_go_submit" value="{url_go_submit}">
+<input type="hidden" id="url_login_after" value="{url_login_after}">
+
+
+
+<script src="js/jquery.form.js"></script>
+<script>
+	jQuery("button,a").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+			switch(this.id)
+			{
+				case "btn_go_submit":			submitForm();															break;
+			}//	end switch
+		}
+	);
+
+
+	function submitForm()
+	{
+
+		pageLoading();
+
+		// 기본 정보
+
+		let werite_id= jQuery('#werite_id').val();
+		let werite_pw= jQuery('#werite_pw').val();
+
+		var targetUrl	=	jQuery("#url_go_submit").val();
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"post",
+			data:{
+				// 기본값
+				werite_id:werite_id
+				,werite_pw:werite_pw
+			},
+			dataType: "json",
+			success: function (rtn_arr)
+			{
+				//console.log( rtn_arr );//	return false;
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						case "validation":
+							PopupDiv_hidden();
+							alert(rtn_arr.msg);
+							jQuery("#"+rtn_arr.error_focus).focus();
+							break;
+						case "alert_reload":
+							PopupDiv_hidden();
+							alert(rtn_arr.msg);
+							location.reload();
+							break;
+						default:
+							//	실패
+							PopupDiv_hidden();
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+
+				}
+				else
+				{
+					//console.log(rtn_arr);
+					window.location.href	=	jQuery("#url_login_after").val();
+				}
+
+			}
+		});
+
+		return false;
+
+	}//	end function
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+</script>

@@ -1,0 +1,133 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Administrators
+        <br><small>Platform Administrators(플랫폼 관리자를 관리 합니다)</small>
+		<br><small>AddNew - Administrator registration(관리자 등록)</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a  ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a >Administrators</a></li>
+        <li class="active">admin_list</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+
+
+          <div class="form-group">
+            <div class="form-row">
+				<div class="col-md-3">
+					<select id="FILTER_FIELD_NAME" name="FILTER_FIELD_NAME" class="form-control" style="width: 150px;">{html_sch_select_box}</select>
+				</div>
+
+				<div class="col-md-3">
+				  <input type="text" id="FILTER_FIELD_VALUE" name="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}"  class="form-control" placeholder="keyword">
+				</div>
+				<div class="col-md-6">
+					<button id="btn_sarch_submit" class="btn btn-secondary" style="height:100%;">search</button>
+<!--					<button id="btn_search_reset" class="btn btn-primary"  style="height:100%;">searchReset</button>-->
+					<button id="btn_addnew" class="btn btn-primary"  style="height:100%;">AddNew</button>
+				</div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="box-body">
+
+			total cnt : {total_record}
+
+			<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+					<tr role="row">
+						<th>No		</th>
+						<th>ID			</th>
+						<th>name			</th>
+						<th>eMail		</th>
+						<th>mobile		</th>
+					</tr>
+                </thead>
+                <tbody>
+				{arr_recordList}
+				<tr role="row" class="even">
+					<td>{record_no}</td>
+					<td>
+					<a href="{detail_url}">{admin_00_id}</a>
+					</td>
+					<td>{admin_00_name}</td>
+					<td>{admin_00_email}</td>
+					<td>{admin_00_mobile}</td>
+				</tr>
+				{/arr_recordList}
+				</tbody>
+              </table>
+              <ul class="pagination">{pageNumber}</ul>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer"><!-- nothing --></div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+
+<input type="hidden" id="url_go_list" value="{url_go_list}">
+<input type="hidden" id="url_go_write" value="{url_go_write}">
+
+<script>
+jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+
+			switch(this.id)
+			{
+				case "btn_sarch_submit":
+
+					let arr_search_field_list   =   new Array(
+						'FILTER_FIELD_NAME'
+						,'FILTER_FIELD_VALUE'
+					);
+
+					goUrl	=	jQuery("#url_go_list").val();
+					let loopCnt1 = 0;
+
+					for(loopCnt1=0; arr_search_field_list.length>loopCnt1; loopCnt1++)
+					{
+						console.log( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+						if( jQuery("#" + arr_search_field_list[loopCnt1] ).val().length > 0 )
+						{
+							if(loopCnt1==0)
+							{
+								goUrl	=	goUrl + "?" + arr_search_field_list[loopCnt1];
+							}
+							else
+							{
+								goUrl	=	goUrl + "&" + arr_search_field_list[loopCnt1];
+							}
+
+							goUrl	=	goUrl + "=" + encodeURIComponent( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+						}// end if
+					}// end for
+					window.location.href	=	goUrl;
+
+
+					break;
+
+				case "btn_addnew":
+					window.location.href	=	jQuery("#url_go_write").val();
+
+					break;
+			}//	end switch
+		}
+		);
+
+</script>

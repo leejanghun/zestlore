@@ -1,0 +1,70 @@
+
+.container-fluid {
+	width: 100%;
+	padding-right: 7.5px;
+	padding-left: 7.5px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+.card {
+	position: relative;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 0 solid rgba(0,0,0,.125);
+	border-radius: .25rem;
+}
+
+.card-body {
+	-webkit-flex: 1 1 auto;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: 1.25rem;
+}
+
+.input-group {
+	position: relative;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-align-items: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+	width: 100%;
+}
+
+.input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control, .input-group > .form-control-plaintext {
+	position: relative;
+	-webkit-flex: 1 1 auto;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	width: 1%;
+	min-width: 0;
+	margin-bottom: 0;
+}
+
+
+.div_br30 { height: 30px;}
+.div_br50 { height: 50px;}
+
+
+.material-symbols-outlined {
+	font-variation-settings:
+			'FILL' 0,
+			'wght' 300,
+			'GRAD' 0,
+			'opsz' 24
+}
