@@ -100,7 +100,6 @@ class Widget_admin_view extends Widget {
 
 		$arr_VARIABLE_DATA['url_go_delete'] =   $arr_VARIABLE_DATA['siteURL'];
 		$arr_VARIABLE_DATA['url_go_delete'] .=   "index.php/admin_default/dbProc_admin_delete";
-		$arr_VARIABLE_DATA['url_go_delete'] .=   "?admin_00_pk=".$arr_VARIABLE_DATA['admin_00_pk'];
 
 		// @ 링크
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

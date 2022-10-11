@@ -159,6 +159,7 @@
 				,admin_00_ip:admin_00_ip
 
 			},
+			async: false,
 			dataType: "json",
 			success: function (rtn_arr)
 			{
@@ -185,7 +186,7 @@
 				}
 				else
 				{
-					var get_admin_00_pk = "/admin_00_pk/"+rtn_arr.SQL_Result_Data.admin_00_pk;
+					var get_admin_00_pk = "?admin_00_pk="+rtn_arr.SQL_Result_Data.admin_00_pk;
 					window.location.href	=	jQuery("#url_go_view").val()+get_admin_00_pk;
 				}//	end if
 

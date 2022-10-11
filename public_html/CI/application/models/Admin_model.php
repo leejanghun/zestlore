@@ -295,6 +295,9 @@ class Admin_model extends CI_Model
 		$this->db->where('admin_00_pk', $arrData['arr_data']['admin_00_pk']);
 
 		$SQL_1	=	$this->db->get_compiled_delete( $arrData['tbl_name'] );
+
+		//debug_var($SQL_1);exit;
+
 		$this->db->query($SQL_1);
 
 		//	@	query 1 끝

@@ -76,7 +76,8 @@ class Widget_admin_modifyForm extends Widget {
 
 		$arr_VARIABLE_DATA['admin_00_pk']				=	$arr_admin_00['admin_00_pk'];
 		$arr_VARIABLE_DATA['admin_00_id']			=	$arr_admin_00['admin_00_id'];
-		$arr_VARIABLE_DATA['admin_00_pw']			=	$arr_admin_00['admin_00_pw'];
+		$arr_VARIABLE_DATA['admin_00_pw1']			=	"";
+		$arr_VARIABLE_DATA['admin_00_pw2']			=	"";
 		$arr_VARIABLE_DATA['admin_00_name']				=	$arr_admin_00['admin_00_name'];
 		$arr_VARIABLE_DATA['admin_00_email']			=	$arr_admin_00['admin_00_email'];
 		$arr_VARIABLE_DATA['admin_00_mobile']	=	$arr_admin_00['admin_00_mobile'];

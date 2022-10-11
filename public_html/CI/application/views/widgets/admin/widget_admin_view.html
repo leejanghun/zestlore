@@ -94,6 +94,8 @@
 <!-- /.content -->
 
 
+<input type="hidden" id="admin_00_pk" 	value="{admin_00_pk}">
+
 <input type="hidden" id="url_go_list" 	value="{url_go_list}">
 <input type="hidden" id="url_go_modify" value="{url_go_modify}">
 <input type="hidden" id="url_go_delete"	value="{url_go_delete}">
@@ -118,10 +120,11 @@
 
 						jQuery.ajax({
 							url:targetUrl,
-							type:"GET",
+							type:"POST",
 							data:{
 								admin_00_pk			: jQuery("#admin_00_pk").val()
 							},
+							async: false,
 							success: function (msg)
 							{
 								window.location.href	=	jQuery("#url_go_list").val();

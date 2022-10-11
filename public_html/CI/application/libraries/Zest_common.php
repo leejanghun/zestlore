@@ -13,8 +13,7 @@ class Zest_common {
 		$this->CI = & get_instance();
 
 		$dbconfig_file = $this->get_db_config();
-		$cfg_server_db1_connect_info	=	$_SERVER["DOCUMENT_ROOT"];
-		$cfg_server_db1_connect_info	.=	$dbconfig_file;
+		$cfg_server_db1_connect_info	=	$dbconfig_file;
 
 		$config	=	json_decode( read_file( $cfg_server_db1_connect_info ) , true );
 		$this->CI->load->database($config);
@@ -31,7 +30,7 @@ class Zest_common {
 		{
 			// aws 운영서버
 			case "aws_operation":
-				$return = "/CI/application/config/cfg_server_db1_connect_info_aws.json";
+				$return = "/home/zestlore/infofile/cfg_server_db1_connect_info_aws.json";
 				break;
 		}
 

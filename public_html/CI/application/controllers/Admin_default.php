@@ -54,8 +54,7 @@ class Admin_default extends CI_Controller {
         ////////////////////////////////////////////////////////////////////////////
 
 		$dbconfig_file = $this->zest_common->get_db_config();
-		$cfg_server_db1_connect_info	=	$_SERVER["DOCUMENT_ROOT"];
-		$cfg_server_db1_connect_info	.=	$dbconfig_file;
+		$cfg_server_db1_connect_info	=	$dbconfig_file;
 
 
         $config	=	json_decode( read_file( $cfg_server_db1_connect_info ) , true );
@@ -252,7 +251,7 @@ class Admin_default extends CI_Controller {
 
 			if (strlen(trim($this->input->get_post('admin_00_id'))) < 1) {
 				$rtnString['error_focus'] = "admin_00_id";
-				$rtnString['msg'] = "[ID] Please enter a value";
+				$rtnString['msg'] = "[ID] 입력하세요";
 				exit(json_encode($rtnString));
 			}
 
@@ -274,31 +273,31 @@ class Admin_default extends CI_Controller {
 
 			if (isset($admin_00['admin_00_pk']) === true) {
 				$rtnString['error_focus'] = "admin_00_id";
-				$rtnString['msg'] = "ID DUPLICATE";
+				$rtnString['msg'] = "ID 중복 입니다.";
 				exit(json_encode($rtnString));
 			}
 
 			if (strlen(trim($this->input->get_post('admin_00_pw'))) < 1) {
 				$rtnString['error_focus'] = "admin_00_pw";
-				$rtnString['msg'] = "[password] Please enter a value";
+				$rtnString['msg'] = "[password] 입력하세요";
 				exit(json_encode($rtnString));
 			}
 
 			if (strlen(trim($this->input->get_post('admin_00_pw2'))) < 1) {
 				$rtnString['error_focus'] = "admin_00_pw2";
-				$rtnString['msg'] = "[password check] Please enter a value";
+				$rtnString['msg'] = "[password check] 입력하세요";
 				exit(json_encode($rtnString));
 			}
 
 			if (trim($this->input->get_post('admin_00_pw')) != trim($this->input->get_post('admin_00_pw2'))) {
 				$rtnString['error_focus'] = "admin_00_pw2";
-				$rtnString['msg'] = "[password check] Incorrect password confirmation";
+				$rtnString['msg'] = "[password check] 비밀번호 확인 틀림";
 				exit(json_encode($rtnString));
 			}
 
 			if (strlen(trim($this->input->get_post('admin_00_name'))) < 1) {
 				$rtnString['error_focus'] = "admin_00_name";
-				$rtnString['msg'] = "[name] Please enter a value";
+				$rtnString['msg'] = "[name] 입력하세요";
 				exit(json_encode($rtnString));
 			}
 
@@ -413,9 +412,10 @@ class Admin_default extends CI_Controller {
 	public function dbProc_admin_update()
 	{
 
-		debug_var(simple_debug_backtrace());exit;
+		//debug_var(simple_debug_backtrace());exit;
 		$this->check_auth_info_ajax();
 		$this->get_auth_info();
+
 
 		////////////////////////////////////////////////////////// 여기 진행중
 		////////////////////////////////////////////////////////// 여기 진행중
@@ -441,7 +441,7 @@ class Admin_default extends CI_Controller {
 
 				if (strlen(trim($this->input->get_post('admin_00_pw2'))) < 1) {
 					$rtnString['error_focus'] = "admin_00_pw2";
-					$rtnString['msg'] = "[password check] Please enter a value";
+					$rtnString['msg'] = "[password check] 입력하세요";
 					exit(json_encode($rtnString));
 				}
 
@@ -454,7 +454,7 @@ class Admin_default extends CI_Controller {
 
 			if (strlen(trim($this->input->get_post('admin_00_name'))) < 1) {
 				$rtnString['error_focus'] = "admin_00_name";
-				$rtnString['msg'] = "[name] Please enter a value";
+				$rtnString['msg'] = "[name] 입력하세요";
 				exit(json_encode($rtnString));
 			}
 
@@ -497,29 +497,27 @@ class Admin_default extends CI_Controller {
 	}
 
 
-	/*
+
 
 	public function dbProc_admin_delete()
 	{
-		$getValue = null;
-		$getValue = $this->arr_segment;
+
+		// debug_var(simple_debug_backtrace());exit;
 
 		$arrData    =   null;
 		$rtnString  =   "FAIL";
 
 		$arrData['tbl_name']    =   'admin_00_default';
-		$arrData['arr_data']['admin_00_pk']	= $getValue['admin_00_pk'];
+		$arrData['arr_data']['admin_00_pk']	= $this->input->get_post('admin_00_pk');
 
-		if( $this->Administrators_model->delete_admin_member_00( $arrData ) == true )
+		if( $this->Admin_model->delete_admin_member_00( $arrData ) == true )
 		{
 			$rtnString  =	"SUCCESS";
 		}// end if
 
 		exit( $rtnString );
-	}
+	}// end - fun
 
-
-	*/
 
 
     private function displayPage( $chk_execParser )
