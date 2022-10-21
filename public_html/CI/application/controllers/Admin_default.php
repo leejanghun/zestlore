@@ -520,6 +520,14 @@ class Admin_default extends CI_Controller {
 
 
 
+
+
+
+
+
+
+
+
     private function displayPage( $chk_execParser )
     {
         //	@	페이지 파서 적용여부 확인

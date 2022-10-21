@@ -1,0 +1,79 @@
+<!-- One -->
+<section id="one">
+	<div class="image main" data-position="center">
+		<img src="images/banner.jpg" alt="" />
+	</div>
+	<div class="container">
+		<header class="major">
+			<h2>병원 목록</h2>
+		</header>
+		<p>병원 정보입니다. 검색이 추가될 예정 입니다. 병원 상세 페이지 예정 입니다.</p>
+	</div>
+</section>
+
+
+<!-- Five -->
+
+	<section id="five">
+
+
+
+		<div class="container">
+
+			<h3>total : {total_record}</h3>
+<!--
+			<br>
+			<section>
+				{arr_recordList}
+				<header>
+				<h4>{hosp_100_yadmNm}</h4>
+				<p>{hosp_100_addr}
+					<br>{hosp_100_telno}</p>
+				{/arr_recordList}
+				</header>
+			</section>
+-->
+
+
+			<section>
+<!--				<h4>Table</h4>-->
+<!--				<h5>Default</h5>-->
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>no</th>
+								<th>병원명</th>
+								<th>주소</th>
+								<th>연락처</th>
+							</tr>
+						</thead>
+						<tbody>
+							{arr_recordList}
+							<tr>
+								<td>{record_no}</td>
+								<td>{hosp_100_yadmNm}</td>
+								<td>{hosp_100_addr}</td>
+								<td>{hosp_100_telno}</td>
+							</tr>
+							{/arr_recordList}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3"><div class="pagination">{pageNumber}</div></td>
+
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+
+
+			</section>
+
+
+
+		</div>
+	</section>
+
+
+

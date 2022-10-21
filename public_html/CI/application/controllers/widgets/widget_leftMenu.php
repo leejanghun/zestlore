@@ -37,9 +37,18 @@ class Widget_leftMenu extends Widget
         {
 			// 관리자 관리
             case "ADMIN_DEFAULT":
-                $arr_VARIABLE_DATA['MEMBER_INFO_ACTIVE']   =   "active";
+                $arr_VARIABLE_DATA['ADMIN_INFO_ACTIVE']   =   "active";
                 break;
 
+			// 병원관리 관리
+			case "HOSPITAL_DEFAULT":
+				$arr_VARIABLE_DATA['HOSPITAL_INFO_ACTIVE']   =   "active";
+				break;
+
+			// 설정 관리
+			case "CONFIG_DEFAULT":
+				$arr_VARIABLE_DATA['CONFIG_INFO_ACTIVE']   =   "active";
+				break;
 
 			/*	예제
 			

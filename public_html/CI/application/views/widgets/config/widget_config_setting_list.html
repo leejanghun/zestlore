@@ -1,0 +1,215 @@
+<script type="text/javascript">
+
+	/** UI 설정 */
+	$(function() {
+		$( "#sortable" ).sortable(); // 얘만 있으면됨
+		//$( "#sortable" ).disableSelection();
+	});
+
+	//]]>
+</script>
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Config Setting
+		<small><!--  --></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a  ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a >Config Setting</a></li>
+
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Default box -->
+	<div class="box">
+		<div class="box-header with-border">
+
+
+
+
+			<div class="form-group">
+				<div class="form-row">
+					<div class="col-md-3">
+						<select id="FILTER_FIELD_NAME" name="FILTER_FIELD_NAME" class="form-control" style="width: 150px;">{html_sch_select_box}</select>
+					</div>
+
+					<div class="col-md-3">
+						<input type="text" id="FILTER_FIELD_VALUE" name="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}"  class="form-control" placeholder="keyword">
+					</div>
+					<div class="col-md-6">
+						<button id="btn_sarch_submit" class="btn btn-secondary" style="height:100%;">search</button>
+						<button id="btn_addnew" class="btn btn-primary"  style="height:100%;">AddNew</button>
+						<button id="btn_order_change" class="btn btn-primary"  style="height:100%;">order change</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="box-body">
+
+			<!--			total cnt : {total_record}-->
+
+			<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<thead>
+				<tr role="row">
+					<th>No		</th>
+					<th>title </th>
+					<th>code </th>
+					<th>input type</th>
+					<th>option</th>
+					<th>value</th>
+					<th>desc </th>
+				</tr>
+				</thead>
+				<tbody id="sortable">
+				{arr_recordList}
+				<tr role="row" class="even">
+					<input type="hidden" class="config_10_orderby" name="config_10_orderby[]" value="{config_10_pk}">
+					<td>{record_no2}</td>
+					<td>
+						<a href="{config_detail_url}">{config_10_title}</a>
+					</td>
+					<td>
+						<a href="{config_detail_url}">{config_10_code}</a>
+					</td>
+					<td>{config_10_input}</td>
+					<td>{config_10_opt}</td>
+					<td>{config_10_value2}</td>
+					<td>{config_10_desc2}</td>
+				</tr>
+				{/arr_recordList}
+				</tbody>
+			</table>
+			<ul class="pagination">{pageNumber}</ul>
+
+		</div>
+		<!-- /.box-body -->
+		<div class="box-footer"><!-- nothing --></div>
+		<!-- /.box-footer-->
+	</div>
+	<!-- /.box -->
+
+</section>
+<!-- /.content -->
+
+<input type="hidden" id="url_go_list" value="{url_go_list}">
+<input type="hidden" id="url_go_write" value="{url_go_write}">
+<input type="hidden" id="url_go_submit_order_change" value="{url_go_submit_order_change}">
+
+<script>
+	jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+
+			switch(this.id)
+			{
+				case "btn_sarch_submit":
+
+
+					let arr_search_field_list   =   new Array(
+						'FILTER_FIELD_NAME'
+						,'FILTER_FIELD_VALUE'
+					);
+
+					goUrl	=	jQuery("#url_go_list").val();
+					let loopCnt1 = 0;
+
+					for(loopCnt1=0; arr_search_field_list.length>loopCnt1; loopCnt1++)
+					{
+						console.log( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+						if( jQuery("#" + arr_search_field_list[loopCnt1] ).val().length > 0 )
+						{
+							if(loopCnt1==0)
+							{
+								goUrl	=	goUrl + "?" + arr_search_field_list[loopCnt1];
+							}
+							else
+							{
+								goUrl	=	goUrl + "&" + arr_search_field_list[loopCnt1];
+							}
+
+							goUrl	=	goUrl + "=" + encodeURIComponent( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+						}// end if
+					}// end for
+					window.location.href	=	goUrl;
+
+					break;
+
+				case "btn_addnew":
+					var Url_thisPage		=	jQuery("#url_go_write").val();
+					window.location.href	=	Url_thisPage;
+
+					break;
+
+				case "btn_order_change":
+					submit_order_change();
+					break;
+			}//	end switch
+		}
+	);
+
+
+	//  순서 변경
+	function submit_order_change()
+	{
+
+		let cnt_ordery = jQuery(".config_10_orderby").length;
+
+		let arr_ordery = new Array(cnt_ordery);
+
+		for(let i=0; i<cnt_ordery; i++){
+			arr_ordery[i] = jQuery(".config_10_orderby").eq(i).val();
+		}
+
+
+		let targetUrl	=	jQuery("#url_go_submit_order_change").val();
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"POST",
+			data:{
+				arr_config_10_orderby:arr_ordery
+			},
+			dataType: "json",
+			success: function (rtn_arr)
+			{
+				//console.log( msg );
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						//
+						case "validation":
+							alert(rtn_arr.msg);
+							jQuery("#"+rtn_arr.error_focus).focus();
+							break;
+						default:
+							//	실패
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+
+				}
+				else
+				{
+					 window.location.href	=	jQuery("#url_go_list").val();
+				}//	end if
+
+			}
+		});
+
+		return false;
+
+	}
+
+
+</script>

@@ -57,10 +57,10 @@ class Dev_tools_01 extends CI_Controller {
 
         //  @   로그인 검사 시작 ----------------------------------------------------------------------------
         //	@	로그인 쿠키 존재 여부 검사
-        if( strlen( trim( $this->input->cookie('json_auth_info') ) ) == 0 )
+        if( strlen( trim( $this->input->cookie('json_auth_info_admin') ) ) == 0 )
         {
             //	@	로그인 값 쿠키가 없을 경우 로그인 창 페이지 출력
-            $targetUrl  =   "/A01/index.php/Admin_login/login_write";
+            $targetUrl  =   "/CI/index.php/Admin_login/login_write";
 
             $js =   "<script>";
             $js .=  "window.location.href='".$targetUrl."';";
@@ -68,7 +68,7 @@ class Dev_tools_01 extends CI_Controller {
             exit($js);
 
         }//	end if
-        $this->arr_Auth_info                =   json_decode( base64_decode( $this->input->cookie('json_auth_info') ) , true );
+        $this->arr_Auth_info                =   json_decode( base64_decode( $this->input->cookie('json_auth_info_admin') ) , true );
 
 //        echo "<pre>";
 //        var_export( $this->arr_Auth_info );

@@ -1,0 +1,282 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Config
+		<small><!--  --></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a  ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a >Config</a></li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Default box -->
+	<div class="box box-primary">
+
+		<div class="box-header with-border">
+			<h4>Config modify</h4>
+			<!--  검색 영역 시작 -->
+			<div class="form-group">
+				<div class="form-row">
+					<div class="col-md-3">
+						<!--
+					  <input type="text" id="FILTER_ADMIN_NAME" name="FILTER_ADMIN_NAME" value="{FILTER_ADMIN_NAME}"  class="form-control" placeholder="Name">
+					   -->
+					</div>
+					<div class="col-md-9" style="text-align: right;">
+
+					</div>
+				</div>
+			</div>
+			<!--  검색 영역 끝 -->
+
+		</div>
+		<div class="box-body">
+
+
+			<form id="bbsWrite" name="bbsWrite">
+				<input type="hidden" class="form-control" id="config_10_pk" name="config_10_pk" value="{config_10_pk}" />
+
+				<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+					<tbody>
+
+					<tr>
+						<th style="width:150px;"> code 		</th>
+						<td>{config_10_code}</td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;"> desc 		</th>
+						<td>{config_10_desc2}</td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;"> data		</th>
+						<td><input type="text" class="form-control" id="config_10_value" 			name="config_10_value" 			value="{config_10_value}"           /> </td>
+					</tr>
+
+					</tbody>
+				</table>
+			</form>
+
+
+			<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<tbody>
+				<tr>
+					<td style="text-align: right;">
+						<button id="btn_formSubmit" 	class="btn btn-primary">SUBMIT</button>
+						<!--						<button id="btn_formReset" 		class="btn btn-primary">RESET</button>-->
+						<button id="btn_go_list" 		class="btn btn-primary">Go List</button>
+						<button id="btn_go_view" 		class="btn btn-primary">Go View</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- /.box-body -->
+		<div class="box-footer"><!-- nothing --></div>
+		<!-- /.box-footer-->
+	</div>
+	<!-- /.box -->
+
+</section>
+<!-- /.content -->
+
+<input type="hidden" id="url_go_list" value="{url_go_list}">
+<input type="hidden" id="url_go_view" value="{url_go_view}">
+<input type="hidden" id="url_go_submit" value="{url_go_submit}">
+
+<script src="js/jquery.form.js"></script>
+<script>
+	jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+			switch(this.id)
+			{
+				case "btn_go_list":				window.location.href	=	jQuery("#url_go_list").val();				break;
+				case "btn_go_view":				window.location.href	=	jQuery("#url_go_view").val();				break;
+				case "btn_formSubmit":			submitForm();															break;
+				case "btn_formReset":
+					if(confirm("The current page is initialized") == true)
+					{
+						window.location.reload( true );
+					}//	end if
+					break;
+			}//	end switch
+		}
+	);
+
+
+	function submitForm()
+	{
+		//var member_10_type = jQuery("input[name='member_10_type']:checked").val(); // 라디오값
+
+		var config_10_pk				=	jQuery("#config_10_pk").val();
+		var config_10_value				=	jQuery("#config_10_value").val();
+
+		var targetUrl	=	jQuery("#url_go_submit").val();
+
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"POST",
+			dataType: "json",
+			async: false,
+			data:{
+
+				config_10_pk:config_10_pk
+				,config_10_value:config_10_value
+			},
+			success: function (rtn_arr)
+			{
+				//console.log( rtn_arr );
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						//
+						case "validation":
+							alert(rtn_arr.msg);
+
+							if(jQuery("#"+rtn_arr.error_focus).length>0)
+							{
+								jQuery("#"+rtn_arr.error_focus).focus();
+							}
+							break;
+						default:
+							//	실패
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+
+				}
+				else
+				{
+					var get_config_10_pk = "/config_10_pk/"+rtn_arr.SQL_Result_Data.config_10_pk;
+					window.location.href	=	jQuery("#url_go_view").val()+get_config_10_pk;
+				}//	end if
+
+			}
+		});
+
+
+		return false;
+
+	}//	end function
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	function ajaxFileUpload()
+	{
+
+		loader_div_show();
+
+		if(jQuery(".mf_11_pk").length>=1)
+		{
+			alert("over 1");
+			loader_div_hide();
+			return false;
+		}
+
+
+		if( jQuery("#fileToUpload").val().trim().length == 0 )
+		{
+			alert("전송대상파일이 선택되지 않았습니다.");
+			loader_div_hide();
+			return false;
+		}//	end if
+
+
+		var targetUrl	=	"/CI/index.php/member_default/member_attachimg_proc";
+		jQuery("#fileWriteForm").ajaxSubmit(
+			{
+				url			: targetUrl,
+				type		: "post",
+				success		: function(data)
+				{
+					loader_div_hide();
+					// console.log( data );
+
+					var arrGetString	=	data.split("|");
+
+					//alert( arrGetString[0] + "----" + arrGetString[1] );
+
+					if( data.indexOf("SUCCESS") == -1 )
+					{
+						//	실패
+						alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+						//location.reload();
+					}else{
+						var arrGetString	=	data.split("|");
+						console.log(arrGetString);
+						//CKEDITOR.instances.bbs31_textData.insertHtml( arrGetString[1] );
+						jQuery(".pre_img").append(arrGetString[1]);
+					}//	end if
+
+					jQuery("#fileToUpload").val('');
+				}
+			}
+		);
+	}//	end function
+
+
+
+	// 이미지 삭제 버튼
+	jQuery(document).on("click",".btn_del_img",function () {
+
+		var mf_11_pk = jQuery(this).attr("mf_11_pk"); // 라이센스 이미지
+
+		var targetUrl	=	"/CI/index.php/member_default/member_attachimg_del_proc";
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"post",
+			data:{
+				mf_11_pk:mf_11_pk
+			},
+			dataType: "json",
+			success: function (rtn_arr)
+			{
+				//console.log( rtn_arr );
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						case "validation":
+							alert(rtn_arr.msg);
+							break;
+						default:
+							//	실패
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+				}
+				else
+				{
+					//console.log(rtn_arr.SQL_Result_Data.pk);
+					jQuery(".pre_img_"+mf_11_pk).remove();
+				}
+
+
+
+			}
+		});
+	});
+
+
+
+</script>

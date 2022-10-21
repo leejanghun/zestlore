@@ -24,28 +24,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url']   = '';
-$config['base_url'] = "http";
-if( isset( $_SERVER['HTTP_HOST'] ) === true )
-{
-	if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on"))
-	{
-		$config['base_url'] = "https";
-	}//   end if
-}// end if( isset( $_SERVER['HTTP_HOST'] ) )
 
-if( $config['base_url'] === "http" )
+
+if(is_cli()===true)
 {
-	// 로드벨런서 적용시
-	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) === true )
+	//echo ("쉘실행"); exit;
+
+}
+else
+{
+	//echo ("웹!!!실행");exit;
+
+	// 웹실행
+	$config['base_url'] = "http";
+	if( isset( $_SERVER['HTTP_HOST'] ) === true )
 	{
-		if( $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+		if ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on"))
 		{
 			$config['base_url'] = "https";
+		}//   end if
+	}// end if( isset( $_SERVER['HTTP_HOST'] ) )
+
+	if( $config['base_url'] === "http" )
+	{
+		// 로드벨런서 적용시
+		if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) === true )
+		{
+			if( $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+			{
+				$config['base_url'] = "https";
+			}// end if
 		}// end if
-	}// end if
+	}
+	$config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
+	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 }
-$config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
-$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+
 
 /*
 |--------------------------------------------------------------------------

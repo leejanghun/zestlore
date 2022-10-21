@@ -30,15 +30,44 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
 
-		<li class="{ADMINISTRATORS_ACTIVE}">
+		<li class="{ADMIN_INFO_ACTIVE}">
 			<a href="/CI/index.php/Admin_default/admin_list">
-				<i class="fa fa-table"></i> <span>Administrator</span>
+				<i class="fa fa-table"></i> <span>관리자</span>
 			</a>
 		</li>
 
 
+<!--		  <li class="{HOSPITAL_INFO_ACTIVE}">
+			  <a href="/CI/index.php/Hospital_default/admin_list">
+				  <i class="fa fa-table"></i> <span>병원(data.go.kr)</span>
+			  </a>
+		  </li>-->
 
-<script>
+		  <!--  설정값 관리 -->
+		  <li class="{CONFIG_INFO_DEFAULT}">
+			  <a href="/CI/index.php/config_default/config_list">
+				  <i class="fa fa-table"></i> <span>Config</span>
+			  </a>
+		  </li>
+
+		  <!--  설정 관리 -->
+<!--		  {left_menu_hide}-->
+		  <li class="{CONFIG_SETTING_ACTIVE}">
+			  <a href="/CI/index.php/config_default/config_setting_list">
+				  <i class="fa fa-table"></i> <span>Config mgmt.</span>
+			  </a>
+		  </li>
+
+
+		  <!--  개발툴 -->
+<!--		  {left_menu_hide}-->
+		  <li class="{DEVTOOL01_ACTIVE} ">
+			  <a href="/CI/index.php/Dev_tools_01/db_table_01_list">
+				  <i class="fa fa-table"></i> <span>개발툴</span>
+			  </a>
+		  </li>
+
+		  <script>
 /*
         <li class="active treeview">
           <a href="#">

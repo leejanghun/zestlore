@@ -1,0 +1,229 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Config Setting
+		<small><!--  --></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a  ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a >Config Setting</a></li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<!-- Default box -->
+	<div class="box box-primary">
+
+		<div class="box-header with-border">
+			<h4>Config Setting modify</h4>
+			<!--  검색 영역 시작 -->
+			<div class="form-group">
+				<div class="form-row">
+					<div class="col-md-3">
+						<!--
+					  <input type="text" id="FILTER_ADMIN_NAME" name="FILTER_ADMIN_NAME" value="{FILTER_ADMIN_NAME}"  class="form-control" placeholder="Name">
+					   -->
+					</div>
+					<div class="col-md-9" style="text-align: right;">
+
+					</div>
+				</div>
+			</div>
+			<!--  검색 영역 끝 -->
+
+		</div>
+		<div class="box-body">
+
+
+			<form id="bbsWrite" name="bbsWrite">
+				<input type="hidden" class="form-control" id="config_10_pk" name="config_10_pk" value="{config_10_pk}" />
+
+				<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+					<tbody>
+
+
+					<tr>
+						<th style="width:150px;"> code</th>
+						<td>{config_10_code}</td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;">
+							title
+							<br>(출력용)
+						</th>
+						<td><input type="text" class="form-control" id="config_10_title" name="config_10_title"	value="{config_10_title}" /> </td>
+					</tr>
+
+					<tr>
+						<th style="width:150px;"> input type	</th>
+						<td>
+							<input type="radio" id="config_10_input_text" class="config_10_input" name="config_10_input" value="text" {checked_config_10_input_text} > text
+							<input type="radio" id="config_10_input_number" class="config_10_input" name="config_10_input" value="number" {checked_config_10_input_number} > number
+							<input type="radio" id="config_10_input_editor" class="config_10_input" name="config_10_input" value="editor" {checked_config_10_input_editor} > editor
+							<input type="radio" id="config_10_input_radio" class="config_10_input" name="config_10_input" value="radio" {checked_config_10_input_radio} > radio
+						</td>
+					</tr>
+
+					<tr class="display_config_10_input {display_config_10_input}">
+						<th style="width:150px;"> radio value option </th>
+						<td>
+							* Use delimiter |
+							<input type="text" class="form-control" id="config_10_opt" name="config_10_opt"	value="{config_10_opt}" />
+						</td>
+					</tr>
+
+
+					<tr>
+						<th style="width:150px;"> desc</th>
+						<td>
+							<textarea id="config_10_desc" name="config_10_desc" style="width: 100%; height: 200px;" >{config_10_desc}</textarea>
+						</td>
+					</tr>
+
+					</tbody>
+				</table>
+			</form>
+
+
+			<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+				<tbody>
+				<tr>
+					<td style="text-align: right;">
+						<button id="btn_formSubmit" 	class="btn btn-primary">SUBMIT</button>
+						<!--						<button id="btn_formReset" 		class="btn btn-primary">RESET</button>-->
+						<button id="btn_go_list" 		class="btn btn-primary">Go List</button>
+						<button id="btn_go_view" 		class="btn btn-primary">Go view</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- /.box-body -->
+		<div class="box-footer"><!-- nothing --></div>
+		<!-- /.box-footer-->
+	</div>
+	<!-- /.box -->
+
+</section>
+<!-- /.content -->
+
+<input type="hidden" id="url_go_submit" value="{url_go_submit}">
+<input type="hidden" id="url_go_view" value="{url_go_view}">
+<input type="hidden" id="url_go_list" value="{url_go_list}">
+
+
+<script src="js/jquery.form.js"></script>
+<script>
+	jQuery("button").bind(
+		"click",function()
+		{
+			console.log( "this.id => " + this.id );
+			switch(this.id)
+			{
+				case "btn_go_list":				window.location.href	=	jQuery("#url_go_list").val();				break;
+				case "btn_go_view":				window.location.href	=	jQuery("#url_go_view").val();				break;
+				case "btn_formSubmit":			submitForm();															break;
+				case "btn_formReset":
+					if(confirm("The current page is initialized") == true)
+					{
+						window.location.reload( true );
+					}//	end if
+					break;
+			}//	end switch
+		}
+	);
+
+
+	function submitForm()
+	{
+		//let  member_10_type = jQuery("input[name='member_10_type']:checked").val(); // 라디오값
+
+		let config_10_pk= jQuery('#config_10_pk').val();
+		//let config_10_code= jQuery('#config_10_code').val();
+		let  config_10_input = jQuery("input[name='config_10_input']:checked").val(); // 라디오값
+		let config_10_opt= jQuery('#config_10_opt').val();
+		// let config_10_value= jQuery('#config_10_value').val();
+		let config_10_desc= jQuery('#config_10_desc').val();
+		let config_10_title= jQuery('#config_10_title').val();
+
+		let targetUrl	=	jQuery("#url_go_submit").val();
+
+		jQuery.ajax({
+			url:targetUrl,
+			type:"POST",
+			dataType: "json",
+			data:{
+
+				config_10_pk:config_10_pk
+				//,config_10_code:config_10_code
+				,config_10_input:config_10_input
+				,config_10_opt:config_10_opt
+				//,config_10_value:config_10_value
+				,config_10_desc:config_10_desc
+				,config_10_title:config_10_title
+			},
+			success: function (rtn_arr)
+			{
+				//console.log( rtn_arr );
+
+				if(rtn_arr.SQL_Result=="FAIL")
+				{
+					switch (rtn_arr.error_type)
+					{
+						//
+						case "validation":
+							alert(rtn_arr.msg);
+							jQuery("#"+rtn_arr.error_focus).focus();
+							break;
+						default:
+							//	실패
+							alert("DB PROCESS ERROR : DB 처리 오류 관리자에게 문의하세요.");
+							//location.reload();
+							break;
+					}// end switch
+
+				}
+				else
+				{
+					var get_config_10_pk = "/config_10_pk/"+rtn_arr.SQL_Result_Data.config_10_pk;
+					window.location.href	=	jQuery("#url_go_view").val()+get_config_10_pk;
+				}//	end if
+
+			}
+		});
+
+		return false;
+
+	}//	end function
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	jQuery(document).on("click",".config_10_input",function () {
+
+		let config_10_input =  jQuery(".config_10_input:checked").val();
+
+		switch (config_10_input)
+		{
+			case "text":
+			case "number":
+			case "editor":
+				jQuery("#config_10_opt").val("");
+				jQuery(".display_config_10_input").addClass("hide");
+
+				break;
+			case "radio":
+				jQuery(".display_config_10_input").removeClass("hide");
+				break;
+		}
+
+	})
+
+</script>
