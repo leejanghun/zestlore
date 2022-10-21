@@ -80,44 +80,44 @@
 				})
 				.each(function() {
 
-					var	$this = $(this),
-						id = $this.attr('href'),
-						$section = $(id);
-
-					// No section for this link? Bail.
-						if ($section.length < 1)
-							return;
-
-					// Scrollex.
-						$section.scrollex({
-							mode: 'middle',
-							top: '5vh',
-							bottom: '5vh',
-							initialize: function() {
-
-								// Deactivate section.
-									$section.addClass('inactive');
-
-							},
-							enter: function() {
-
-								// Activate section.
-									$section.removeClass('inactive');
-
-								// No locked links? Deactivate all links and activate this section's one.
-									if ($nav_a.filter('.active-locked').length == 0) {
-
-										$nav_a.removeClass('active');
-										$this.addClass('active');
-
-									}
-
-								// Otherwise, if this section's link is the one that's locked, unlock it.
-									else if ($this.hasClass('active-locked'))
-										$this.removeClass('active-locked');
-
-							}
-						});
+					// var	$this = $(this),
+					// 	id = $this.attr('href'),
+					// 	$section = $(id);
+					//
+					// // No section for this link? Bail.
+					// 	if ($section.length < 1)
+					// 		return;
+					//
+					// // Scrollex.
+					// 	$section.scrollex({
+					// 		mode: 'middle',
+					// 		top: '5vh',
+					// 		bottom: '5vh',
+					// 		initialize: function() {
+					//
+					// 			// Deactivate section.
+					// 				$section.addClass('inactive');
+					//
+					// 		},
+					// 		enter: function() {
+					//
+					// 			// Activate section.
+					// 				$section.removeClass('inactive');
+					//
+					// 			// No locked links? Deactivate all links and activate this section's one.
+					// 				if ($nav_a.filter('.active-locked').length == 0) {
+					//
+					// 					$nav_a.removeClass('active');
+					// 					$this.addClass('active');
+					//
+					// 				}
+					//
+					// 			// Otherwise, if this section's link is the one that's locked, unlock it.
+					// 				else if ($this.hasClass('active-locked'))
+					// 					$this.removeClass('active-locked');
+					//
+					// 		}
+					// 	});
 
 				});
 
