@@ -38,6 +38,14 @@ if( $config['base_url'] === "http" )
 	// 로드벨런서 적용시
 	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) === true )
 	{
+
+        if( $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' )
+        {
+            // https 로 리다이렉트
+            header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
+            exit;
+        }// end if
+
 		if( $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
 		{
 			$config['base_url'] = "https";
