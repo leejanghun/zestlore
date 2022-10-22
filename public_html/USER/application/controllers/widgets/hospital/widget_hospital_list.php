@@ -81,27 +81,28 @@ class Widget_hospital_list extends Widget {
 
 		$arrData				=   null;
 
+		$arr_sql_where = array();
 		//-------------------------------------------------------------------------
 		//  검색처리값 처리 시작 -----------------------------------------------------
-
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//////// 필수 검색
-		//$arrData['sqlWhere'] = " member_10_default.member_10_type = 'member' ";
-		//////// 필수 검색
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		if(
 			( is_null( $arr_VARIABLE_DATA['FILTER_FIELD_VALUE'] ) === false )
 			&& ( strlen( trim( $arr_VARIABLE_DATA['FILTER_FIELD_VALUE'] ) ) > 0 )
 		)
 		{
-			$arrData['sqlWhere'] .= "and hospital_100_default.".$arr_VARIABLE_DATA['FILTER_FIELD_NAME'] . " Like '%" . $arr_VARIABLE_DATA['FILTER_FIELD_VALUE'] . "%'";
+            $arr_sql_where[] = " hospital_100_default.".$arr_VARIABLE_DATA['FILTER_FIELD_NAME'] . " Like '%" . $arr_VARIABLE_DATA['FILTER_FIELD_VALUE'] . "%'";
 			$arr_searchValue['FILTER_FIELD_NAME']	= $arr_VARIABLE_DATA['FILTER_FIELD_NAME'];
 			$arr_searchValue['FILTER_FIELD_VALUE']	= $arr_VARIABLE_DATA['FILTER_FIELD_VALUE'];
 		}else{
 			$arr_searchValue['FILTER_FIELD_NAME']	= "";
 			$arr_searchValue['FILTER_FIELD_VALUE']	= "";
 		}//	end if
+
+
+        if( count($arr_sql_where)>0 )
+        {
+            $arrData['sqlWhere'] = implode(" and " , $arr_sql_where);
+        }
 
 		//  검색처리값 처리 끝 ---------------------------------------------------------
 		//---------------------------------------------------------------------------
@@ -151,9 +152,12 @@ class Widget_hospital_list extends Widget {
 		{
 			$arr_recordList[$loopCnt_1]                       	=   $arr_SQL_Result[$loopCnt_1];
 
-			$arr_recordList[$loopCnt_1]['member_detail_url']   =   $arr_VARIABLE_DATA['siteURL'];
-			$arr_recordList[$loopCnt_1]['member_detail_url']   .=  "index.php/hospital_default/member_detail";
-			$arr_recordList[$loopCnt_1]['member_detail_url']   .=   "?hosp_100_pk=".$arr_SQL_Result[$loopCnt_1]['hosp_100_pk'];
+			$arr_recordList[$loopCnt_1]['detail_url']   =   $arr_VARIABLE_DATA['siteURL'];
+			$arr_recordList[$loopCnt_1]['detail_url']   .=  "index.php/hospital_default/hospital_detail";
+			$arr_recordList[$loopCnt_1]['detail_url']   .=   "?hosp_100_pk=".$arr_SQL_Result[$loopCnt_1]['hosp_100_pk'];
+			$arr_recordList[$loopCnt_1]['detail_url']   .=   "&per_page=".$arr_VARIABLE_DATA['per_page'];
+			$arr_recordList[$loopCnt_1]['detail_url']   .=   "&FILTER_FIELD_NAME=".$arr_VARIABLE_DATA['FILTER_FIELD_NAME'];
+			$arr_recordList[$loopCnt_1]['detail_url']   .=   "&FILTER_FIELD_VALUE=".$arr_VARIABLE_DATA['FILTER_FIELD_VALUE'];
 
 			$arr_recordList[$loopCnt_1]['record_no']   =   $record_no--; // 게시글 출력번호
 			$arr_recordList[$loopCnt_1]['record_no2']   =   $loopCnt_1+1;  // 게시글 출력번호
@@ -261,8 +265,8 @@ class Widget_hospital_list extends Widget {
 		///////////////////////////////////////////////////////////////////////////////////////////////////////
 		//	@	검색 창 처리
 
-		$arr_FILTER_FIELD_OPTION_TEXT		=	array("id", "name");
-		$arr_FILTER_FIELD_OPTION_VALUE		=	array("member_10_id", "member_10_name");
+		$arr_FILTER_FIELD_OPTION_TEXT		=	array("병원명", "주소");
+		$arr_FILTER_FIELD_OPTION_VALUE		=	array("hosp_100_yadmNm", "hosp_100_addr");
 		$arr_VARIABLE_DATA['html_sch_select_box']    =   makeOptionList(
 			$arr_FILTER_FIELD_OPTION_VALUE
 			, $arr_FILTER_FIELD_OPTION_TEXT

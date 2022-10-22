@@ -7,7 +7,7 @@
 		<header class="major">
 			<h2>병원 목록</h2>
 		</header>
-		<p>병원 정보입니다. 검색이 추가될 예정 입니다. 병원 상세 페이지 예정 입니다.</p>
+		<p>공공데이터포털에서 가져온 병원 데이터</p>
 	</div>
 </section>
 
@@ -19,6 +19,22 @@
 
 
 		<div class="container">
+
+            <section>
+                <h4>검색</h4>
+                    <div class="row gtr-uniform">
+                        <div class="col-4 col-12-xsmall">
+                            <select name="FILTER_FIELD_NAME" id="FILTER_FIELD_NAME">{html_sch_select_box}</select>
+                        </div>
+                        <div class="col-4 col-12-xsmall">
+                            <input type="text" name="FILTER_FIELD_VALUE" id="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}" placeholder="키워드" />
+                        </div>
+                        <div class="col-4 col-12-xsmall">
+                            <input id="btn_sarch_submit" type="button" value="검색" />
+                        </div>
+
+                    </div>
+            </section>
 
 			<h3>total : {total_record}</h3>
 <!--
@@ -52,7 +68,7 @@
 							{arr_recordList}
 							<tr>
 								<td>{record_no}</td>
-								<td>{hosp_100_yadmNm}</td>
+                                <td><a href="{detail_url}">{hosp_100_yadmNm}</a></td>
 								<td>{hosp_100_addr}</td>
 								<td>{hosp_100_telno}</td>
 							</tr>
@@ -76,4 +92,41 @@
 	</section>
 
 
+<input type="hidden"  id="url_go_list"    value="{url_go_list}" >
 
+
+<script>
+
+    jQuery(document).on("click","#btn_sarch_submit",function () {
+
+        let goUrl	=   "";
+
+        let arr_search_field_list   =   new Array(
+            'FILTER_FIELD_NAME'
+            ,'FILTER_FIELD_VALUE'
+        );
+
+        goUrl	=	jQuery("#url_go_list").val();
+        let loopCnt1 = 0;
+        for(loopCnt1=0; arr_search_field_list.length>loopCnt1; loopCnt1++)
+        {
+            console.log( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+            if( jQuery("#" + arr_search_field_list[loopCnt1] ).val().length > 0 )
+            {
+                if(loopCnt1==0)
+                {
+                    goUrl	=	goUrl + "?" + arr_search_field_list[loopCnt1];
+                }
+                else
+                {
+                    goUrl	=	goUrl + "&" + arr_search_field_list[loopCnt1];
+                }
+
+                goUrl	=	goUrl + "=" + encodeURIComponent( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+            }// end if
+        }// end for
+         window.location.href	=	goUrl;
+    })
+
+
+</script>

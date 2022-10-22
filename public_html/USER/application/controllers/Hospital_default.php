@@ -167,14 +167,10 @@ class Hospital_default extends CI_Controller {
 
 
 
-/*
+
 	public function hospital_detail()
 	{
 		// debug_var(simple_debug_backtrace());exit;
-
-		$this->check_auth_info(); // 로그인 체크
-		//$this->check_auth_info_ajax(); // 로그인 체크
-		$this->get_auth_info();
 
 		//	@	출력 위젯 정의 & 컨텐츠 위젯 처리값( HTML ) 받아오기
 		$this->arr_class_common["widget_top"]	   =	$this->widget->run(
@@ -186,26 +182,14 @@ class Hospital_default extends CI_Controller {
 			)
 		);
 
-		// 일반 , 브로커 분리
-		switch ($this->construct_member_10_default['member_10_type'])
-		{
-			case "member":
-				$widgets_contents = "widgets/mypage_realEstateSale/widget_my_realEstateSale_detail";
-				break;
-			case "broker":
-				$widgets_contents = "widgets/mypage_realEstateSale/widget_my_realEstateSale_detail_broker";
-				break;
-		}
-
-		$this->arr_class_common["widget_contents"]	=	$this->widget->run(
-			$widgets_contents
-			, array(
-				'controller'	 	=>	get_class ( $this )
-			,'function'			=>	__FUNCTION__
-			,'sendData'			=>	$this->arr_segment
-			,'member_cookie'			=>	$this->construct_member_10_default
-			)
-		);
+        $this->arr_class_common["widget_contents"]	=	$this->widget->run(
+            'widgets/hospital/widget_hospital_detail'
+            , array(
+                'controller'	 	=>	get_class ( $this )
+            ,'function'			=>	__FUNCTION__
+            ,'sendData'			=>	$this->arr_segment
+            )
+        );
 
 		$this->arr_class_common["widget_bottom"]	   =	$this->widget->run(
 			'widgets/widget_bottom'
@@ -225,7 +209,7 @@ class Hospital_default extends CI_Controller {
 		$this->displayPage( $chk_execParser );
 
 	}// end - fun
-*/
+
 
 
 
