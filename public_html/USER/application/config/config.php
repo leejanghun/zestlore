@@ -41,7 +41,7 @@ if( $config['base_url'] === "http" )
 
         if( $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' )
         {
-            // https 로 리다이렉트
+            // https 로 리다이렉트..
             header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
             exit;
         }// end if
