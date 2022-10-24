@@ -156,8 +156,7 @@ class Widget_hospital_detail extends Widget {
         $arr_VARIABLE_DATA['go_url_naver_map']   .=   "?enc=utf8&level=1&pinType=SITE";
         $arr_VARIABLE_DATA['go_url_naver_map']   .=   "&lng=".$arr_VARIABLE_DATA['hosp_100_XPos'];
         $arr_VARIABLE_DATA['go_url_naver_map']   .=   "&lat=".$arr_VARIABLE_DATA['hosp_100_YPos'];
-        $arr_VARIABLE_DATA['go_url_naver_map']   .=   "&FILTER_FIELD_NAME=".$arr_VARIABLE_DATA['FILTER_FIELD_NAME'];
-        $arr_VARIABLE_DATA['go_url_naver_map']   .=   "&FILTER_FIELD_VALUE=".$arr_VARIABLE_DATA['FILTER_FIELD_VALUE'];
+        $arr_VARIABLE_DATA['go_url_naver_map']   .=   "&pinTitle=".$arr_VARIABLE_DATA['hosp_100_yadmNm'];
 
         /// @이동 url
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
