@@ -137,7 +137,7 @@ class Widget_hospital_list extends Widget {
 
 		$arrData['Limit_RecCnt']   =   $_CNT_RECORD_PER_PAGE;
 		$arrData['Limit_nowPage']  =   $_NOWPAGE;
-		$arrData['OrderBy']        =   "hosp_100_pk asc";
+		$arrData['OrderBy']        =   "hosp_100_pk desc";
 
 		$arr_SQL_Result	=   null;
 		$arr_SQL_Result       =   $this->CI->Hospital_model->getHospital_RecordList($arrData);
