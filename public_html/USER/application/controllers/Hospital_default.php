@@ -212,6 +212,49 @@ class Hospital_default extends CI_Controller {
 
 
 
+	public function hospital_detail_dev()
+	{
+		// debug_var(simple_debug_backtrace());exit;
+
+		//	@	출력 위젯 정의 & 컨텐츠 위젯 처리값( HTML ) 받아오기
+		$this->arr_class_common["widget_top"]	   =	$this->widget->run(
+			'widgets/widget_top'
+			, array(
+				'controller'	 	=>	get_class ( $this )
+			,'function'			=>	__FUNCTION__
+			,'sendData'			=>	$this->arr_segment
+			)
+		);
+
+		$this->arr_class_common["widget_contents"]	=	$this->widget->run(
+			'widgets/hospital/widget_hospital_detail_dev'
+			, array(
+				'controller'	 	=>	get_class ( $this )
+			,'function'			=>	__FUNCTION__
+			,'sendData'			=>	$this->arr_segment
+			)
+		);
+
+		$this->arr_class_common["widget_bottom"]	   =	$this->widget->run(
+			'widgets/widget_bottom'
+			, array(
+				'controller'	 	=>	get_class ( $this )
+			,'function'			=>	__FUNCTION__
+			,'sendData'			=>	$this->arr_segment
+			)
+		);
+
+
+
+		//	@	페이지 출력 여부 정의
+		$chk_execParser				=	'execParser_YES';
+
+		//	@	페이지 출력 실행
+		$this->displayPage( $chk_execParser );
+
+	}// end - fun
+
+
 
 	private function displayPage( $chk_execParser )
 	{

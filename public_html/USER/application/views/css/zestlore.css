@@ -55,3 +55,7 @@
 	font-size:.875rem;
 	line-height:1.5
 }
+
+.display_none {
+	display: none;
+}

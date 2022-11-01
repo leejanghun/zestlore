@@ -158,5 +158,5 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
 	'common_model'
-	//,'Config_model'
+	,'Config_model'
 );
