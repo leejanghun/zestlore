@@ -46,7 +46,7 @@
 
 					<tr>
 						<td>연락처</td>
-						<td>{hosp_100_telno}</td>
+                        <td><a href="tel:{hosp_100_telno}">{hosp_100_telno}</a></td>
 					</tr>
 
 					<tr>
@@ -133,7 +133,68 @@
 		</section>
 
 
-		<section class="{display_getEqpInfo}">
+
+        <section class="{display_getDgsbjtInfo}">
+            <h4>진료 과목 정보</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>진료과목</th>
+                        <th>의사수</th>
+                        <th>선택진료 의사수</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {arr_getDgsbjtInfo_list}
+                    <tr>
+                        <td>{hd_102_dgsbjtCdNm}</td>
+                        <td>{hd_102_dgsbjtPrSdrCnt}</td>
+                        <td>{hd_102_cdiagDrCnt}</td>
+                    </tr>
+                    {/arr_getDgsbjtInfo_list}
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+
+
+        <section class="{display_getDgsbjtInfo}">
+            <h4>의료장비 정보</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>장비명</th>
+                        <th>보유대수</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {arr_getMedOftInfo_list}
+                    <tr>
+                        <td>{hmo_103_oftCdNm}</td>
+                        <td>{hmo_103_oftCnt}</td>
+                    </tr>
+                    {/arr_getMedOftInfo_list}
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+
+
+        <section class="{display_getEqpInfo}">
 			<h4>병상정보</h4>
 			<div class="table-wrapper">
 				<table>
@@ -200,7 +261,16 @@
 
 		</section>
 
+
+
+
+
+
 		<a href="{url_go_list}" class="button small">목록</a>
 
 	</div>
 </section>
+
+
+<!-- 구글 광고 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4386322349066500" crossorigin="anonymous"></script>

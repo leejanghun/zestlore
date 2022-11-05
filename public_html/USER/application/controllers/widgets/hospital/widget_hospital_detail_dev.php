@@ -131,95 +131,176 @@ class Widget_hospital_detail_dev extends Widget {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// @ 상세데이터 - 의료기관의 진료과목과 의사수 등 정보 제공
+        if(1) {
+
+            $arr_VARIABLE_DATA['display_getDgsbjtInfo'] = "display_none"; // 출력 안함
+
+            //// 데이터 검색
+            $arrData = null;
+            $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
+            $arrData['OrderBy'] = "hd_102_pk asc";
+            $arr_SQL_Result = null;
+            $arr_SQL_Result = $this->CI->Hospital_model->getDgsbjtInfo_RecordList($arrData);
+
+            if (count($arr_SQL_Result) < 1) {
+                // 입력 데이터가 없으면 api 호출
+                $return_getDgsbjtInfo = $this->getDgsbjtInfo($arr_hospital_100);/// api 호출
+
+                if ($return_getDgsbjtInfo > 0) {
+                    //// 데이터 검색
+                    $arrData = null;
+                    $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
+                    $arrData['OrderBy'] = "hd_102_pk desc";
+                    $arr_SQL_Result = null;
+                    $arr_SQL_Result = $this->CI->Hospital_model->getDgsbjtInfo_RecordList($arrData);
+
+                }
+            }
+
+
+            if (count($arr_SQL_Result) > 0) {
+                $arr_recordList = array();
+                $loopCntLimit = count($arr_SQL_Result);
+
+                for ($loopCnt_1 = 0; $loopCntLimit > $loopCnt_1; $loopCnt_1++) {
+                    $arr_recordList[$loopCnt_1] = $arr_SQL_Result[$loopCnt_1];
+                }//	end for
+
+                $arr_VARIABLE_DATA['arr_getDgsbjtInfo_list'] = $arr_recordList;
+
+                $arr_VARIABLE_DATA['display_getDgsbjtInfo'] = ""; // 출력
+
+            }
+
+        }// end - if(1)
+
+        /// @ 상세데이터 - 의료기관의 진료과목과 의사수 등 정보 제공
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// @ 상세데이터 - 의료기관 종별, 주소, 병상 수 등 시설정보
+        if(1) {
 
-		$arr_VARIABLE_DATA['display_getEqpInfo'] = "display_none"; // 출력 안함
+            $arr_VARIABLE_DATA['display_getEqpInfo'] = "display_none"; // 출력 안함
 
-		//// 데이터 검색
-		$arrData              =   null;
-        $arrData['sqlWhere']  =   array('fk_hosp_100_pk' =>  $arr_VARIABLE_DATA['hosp_100_pk']);
+            //// 데이터 검색
+            $arrData = null;
+            $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
 
-        $arr_SQL_Result	=   null;
-        $arr_SQL_Result       =   $this->CI->Hospital_model->getEqpInfo_RecordList($arrData);
+            $arr_SQL_Result = null;
+            $arr_SQL_Result = $this->CI->Hospital_model->getEqpInfo_RecordList($arrData);
 
-		if( count($arr_SQL_Result) > 1 )
-		{
+            //debug_var($arr_SQL_Result);exit;
+            /////////////////////////////////////////////////////////////
+            /// db에 없으면 api 호출
+            if (count($arr_SQL_Result) < 1) {
+                $api_return = $this->api_getEqpInfo($arr_hospital_100);// api 호출
 
-			$arr_VARIABLE_DATA['display_getEqpInfo'] = "";// 출력함
+                if (isset($api_return['SQL_Result_Data']['hgi_101_pk']) === true) {
+                    //// 데이터 검색
+                    $arrData = null;
+                    $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
 
-			$arr_hospital_101_getEqpInfo = $arr_SQL_Result[0];
+                    $arr_SQL_Result = null;
+                    $arr_SQL_Result = $this->CI->Hospital_model->getEqpInfo_RecordList($arrData);
 
-			$arr_VARIABLE_DATA['hgi_101_pk'] = $arr_hospital_101_getEqpInfo['hgi_101_pk'] ;
-			$arr_VARIABLE_DATA['fk_hosp_100_pk'] = $arr_hospital_101_getEqpInfo['fk_hosp_100_pk'] ;
-			$arr_VARIABLE_DATA['hgi_101_orgTyCdNm'] = $arr_hospital_101_getEqpInfo['hgi_101_orgTyCdNm'] ;
-			$arr_VARIABLE_DATA['hgi_101_aduChldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_aduChldSprmCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_anvirTrrmSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_anvirTrrmSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_chldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_chldSprmCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_emymCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_emymCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_hghrSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_hghrSickbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_isnrSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_isnrSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_nbySprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_nbySprmCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_partumCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_partumCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_permSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_permSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_psydeptClsGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsGnlSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_psydeptClsHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsHigSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_psydeptOpenGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenGnlSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_psydeptOpenHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenHigSbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_ptrmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_ptrmCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_soprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_soprmCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_stdSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_stdSickbdCnt'] ;
-			$arr_VARIABLE_DATA['hgi_101_moddt'] = $arr_hospital_101_getEqpInfo['hgi_101_moddt'] ;
+                }
+            }
 
-		}
-		else
-		{
-			$api_return = $this->api_getEqpInfo($arr_hospital_100);// api 호출
+            /// db에 없으면 api 호출
+            /////////////////////////////////////////////////////////////
 
-			if( isset($api_return['SQL_Result_Data']['hgi_101_pk'])===true)
-			{
-				$arr_VARIABLE_DATA['display_getEqpInfo'] = ""; //  출력함
+            if (count($arr_SQL_Result) > 0) {
+                $arr_VARIABLE_DATA['display_getEqpInfo'] = "";// 출력함
 
-				//// 데이터 검색
-				$arrData              =   null;
-				$arrData['sqlWhere']  =   array('fk_hosp_100_pk' =>  $arr_VARIABLE_DATA['hosp_100_pk']);
+                $arr_hospital_101_getEqpInfo = $arr_SQL_Result[0];
 
-				$arr_SQL_Result	=   null;
-				$arr_SQL_Result       =   $this->CI->Hospital_model->getEqpInfo_RecordList($arrData);
+                $arr_VARIABLE_DATA['hgi_101_pk'] = $arr_hospital_101_getEqpInfo['hgi_101_pk'];
+                $arr_VARIABLE_DATA['fk_hosp_100_pk'] = $arr_hospital_101_getEqpInfo['fk_hosp_100_pk'];
+                $arr_VARIABLE_DATA['hgi_101_orgTyCdNm'] = $arr_hospital_101_getEqpInfo['hgi_101_orgTyCdNm'];
+                $arr_VARIABLE_DATA['hgi_101_aduChldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_aduChldSprmCnt'];
+                $arr_VARIABLE_DATA['hgi_101_anvirTrrmSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_anvirTrrmSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_chldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_chldSprmCnt'];
+                $arr_VARIABLE_DATA['hgi_101_emymCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_emymCnt'];
+                $arr_VARIABLE_DATA['hgi_101_hghrSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_hghrSickbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_isnrSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_isnrSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_nbySprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_nbySprmCnt'];
+                $arr_VARIABLE_DATA['hgi_101_partumCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_partumCnt'];
+                $arr_VARIABLE_DATA['hgi_101_permSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_permSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_psydeptClsGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsGnlSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_psydeptClsHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsHigSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_psydeptOpenGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenGnlSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_psydeptOpenHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenHigSbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_ptrmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_ptrmCnt'];
+                $arr_VARIABLE_DATA['hgi_101_soprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_soprmCnt'];
+                $arr_VARIABLE_DATA['hgi_101_stdSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_stdSickbdCnt'];
+                $arr_VARIABLE_DATA['hgi_101_moddt'] = $arr_hospital_101_getEqpInfo['hgi_101_moddt'];
+            }
 
-				$arr_hospital_101_getEqpInfo = $arr_SQL_Result[0];
-
-				$arr_VARIABLE_DATA['hgi_101_pk'] = $arr_hospital_101_getEqpInfo['hgi_101_pk'] ;
-				$arr_VARIABLE_DATA['fk_hosp_100_pk'] = $arr_hospital_101_getEqpInfo['fk_hosp_100_pk'] ;
-				$arr_VARIABLE_DATA['hgi_101_orgTyCdNm'] = $arr_hospital_101_getEqpInfo['hgi_101_orgTyCdNm'] ;
-				$arr_VARIABLE_DATA['hgi_101_aduChldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_aduChldSprmCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_anvirTrrmSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_anvirTrrmSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_chldSprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_chldSprmCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_emymCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_emymCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_hghrSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_hghrSickbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_isnrSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_isnrSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_nbySprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_nbySprmCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_partumCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_partumCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_permSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_permSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_psydeptClsGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsGnlSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_psydeptClsHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptClsHigSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_psydeptOpenGnlSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenGnlSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_psydeptOpenHigSbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_psydeptOpenHigSbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_ptrmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_ptrmCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_soprmCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_soprmCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_stdSickbdCnt'] = $arr_hospital_101_getEqpInfo['hgi_101_stdSickbdCnt'] ;
-				$arr_VARIABLE_DATA['hgi_101_moddt'] = $arr_hospital_101_getEqpInfo['hgi_101_moddt'] ;
-
-			}
-		}
-
+        }// end - if(1)
 		/// @ 상세데이터 - 의료기관 종별, 주소, 병상 수 등 시설정보
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// @ 상세데이터 - 의료기관의 장비코드에 따른 장비 대수 등 의료장비정보 제공
+        if(1) {
+
+            $arr_VARIABLE_DATA['display_getMedOftInfo'] = "display_none"; // 출력 안함
+
+            //// 데이터 검색
+            $arrData = null;
+            $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
+            $arrData['OrderBy'] = "hmo_103_pk asc";
+            $arr_SQL_Result = null;
+            $arr_SQL_Result = $this->CI->Hospital_model->getMedOftInfo_RecordList($arrData);
+
+            // debug_var($arr_SQL_Result);exit;
+
+            if (count($arr_SQL_Result) < 1) {
+                // 입력 데이터가 없으면 api 호출
+                $return_getMedOftInfo = $this->api_getMedOftInfo($arr_hospital_100);/// api 호출
+
+                if ($return_getMedOftInfo > 0) {
+                    //// 데이터 검색
+                    $arrData = null;
+                    $arrData['sqlWhere'] = array('fk_hosp_100_pk' => $arr_VARIABLE_DATA['hosp_100_pk']);
+                    $arrData['OrderBy'] = "hmo_103_pk asc";
+                    $arr_SQL_Result = null;
+                    $arr_SQL_Result = $this->CI->Hospital_model->getMedOftInfo_RecordList($arrData);
+
+                }
+            }
+
+
+            if (count($arr_SQL_Result) > 0) {
+                $arr_recordList = array();
+                $loopCntLimit = count($arr_SQL_Result);
+
+                for ($loopCnt_1 = 0; $loopCntLimit > $loopCnt_1; $loopCnt_1++) {
+                    $arr_recordList[$loopCnt_1] = $arr_SQL_Result[$loopCnt_1];
+                }//	end for
+
+                $arr_VARIABLE_DATA['arr_getMedOftInfo_list'] = $arr_recordList;
+
+                $arr_VARIABLE_DATA['display_getMedOftInfo'] = ""; // 출력
+
+            }
+
+        }// end - if(1)
+
+        /// @ 상세데이터 - 의료기관의 장비코드에 따른 장비 대수 등 의료장비정보 제공
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         /// @데이터 가져오기
@@ -260,6 +341,89 @@ class Widget_hospital_detail_dev extends Widget {
         return $this->CI->parser->parse( $arr_VARIABLE_DATA['html_tpl_path'] , $arr_VARIABLE_DATA, true );
 
     }//	end function
+
+
+
+    /// @ 상세데이터 - 의료기관의 진료과목과 의사수 등 정보 제공
+	private function getDgsbjtInfo($arr_hospital_100)
+	{
+        // debug_var($arr_hospital_100);
+
+	    $exe_datetime =  date("Y-m-d H:i:s");
+
+		$rtnString = 0;
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/// @ api 설정값
+		$config_getEqpInfo = $this->CI->Config_model->get_config_10_default_code("getEqpInfo");
+		$service_key = $config_getEqpInfo['config_10_value'];
+		/// @ api 설정값
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// @ api 호출
+		$url = 'http://apis.data.go.kr/B551182/MadmDtlInfoService/getDgsbjtInfo'; //  진료과목2
+		$queryParams = '?' . urlencode('serviceKey') . '=' . urlencode($service_key); //Service Key
+		$queryParams .= '&' . urlencode('ykiho') . '=' . urlencode($arr_hospital_100['hosp_100_ykiho']);
+		$queryParams .= '&' . urlencode('_type') . '=' . urlencode('json');
+		$queryParams .= '&' . urlencode('pageNo') . '=' . urlencode(1);
+		$queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode(100); //  한번에 가져오는 갯수
+
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url . $queryParams);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		// debug_var($response);
+
+		$response_arr = json_decode($response,true);
+
+		// debug_var($response_arr['response']['body']['totalCount']);
+
+        /// @ api 호출
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		if( isset($response_arr['response']['body']['totalCount'])===true && $response_arr['response']['body']['totalCount']>0)
+		{
+            $items = $response_arr['response']['body']['items']['item'];
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// @ 데이터 입력
+            for($i=0;$i<$response_arr['response']['body']['totalCount'];$i++)
+            {
+
+                $arrDBdata = array();
+                $arrDBdata = $items[$i];
+
+                $arrData['tbl_name1']    =   'hospital_102_getDgsbjtInfo';
+
+                //$arrData['arr_data1']['hd_102_pk'] = $arrDBdata['hd_102_pk'];
+                $arrData['arr_data1']['fk_hosp_100_pk'] = $arr_hospital_100['hosp_100_pk'];
+                $arrData['arr_data1']['hd_102_dgsbjtCd'] = $arrDBdata['dgsbjtCd'];
+                $arrData['arr_data1']['hd_102_dgsbjtCdNm'] = $arrDBdata['dgsbjtCdNm'];
+                $arrData['arr_data1']['hd_102_dgsbjtPrSdrCnt'] = $arrDBdata['dgsbjtPrSdrCnt'];
+                $arrData['arr_data1']['hd_102_cdiagDrCnt'] = $arrDBdata['cdiagDrCnt'];
+                $arrData['arr_data1']['hd_102_moddt'] = $exe_datetime;
+
+                $this->CI->Hospital_model->insert_hospital_102_getDgsbjtInfo( $arrData ); // 데이터 입력
+
+                $rtnString = $i;
+            }// end - for
+
+            /// @ 데이터 입력
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }// end - if
+
+
+        return $rtnString;
+
+	}
 
 
 
@@ -336,7 +500,93 @@ class Widget_hospital_detail_dev extends Widget {
 	}// end - fun
 
 
-}
+
+    /// @ 상세데이터 - 의료기관의 장비코드에 따른 장비 대수 등 의료장비정보 제공
+    private function api_getMedOftInfo($arr_hospital_100)
+    {
+        $exe_datetime =  date("Y-m-d H:i:s");
+
+        $rtnString = 0;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// @ api 설정값
+        $config_getEqpInfo = $this->CI->Config_model->get_config_10_default_code("getEqpInfo");
+        $service_key = $config_getEqpInfo['config_10_value'];
+        /// @ api 설정값
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// @ api 호출
+        $url = 'http://apis.data.go.kr/B551182/MadmDtlInfoService/getMedOftInfo'; //  진료과목2
+        $queryParams = '?' . urlencode('serviceKey') . '=' . urlencode($service_key); //Service Key
+        $queryParams .= '&' . urlencode('ykiho') . '=' . urlencode($arr_hospital_100['hosp_100_ykiho']);
+        $queryParams .= '&' . urlencode('_type') . '=' . urlencode('json');
+        $queryParams .= '&' . urlencode('pageNo') . '=' . urlencode(1);
+        $queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode(200); //  한번에 가져오는 갯수
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url . $queryParams);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // debug_var($response);
+
+        $response_arr = json_decode($response,true);
+
+        // debug_var($response_arr);exit;
+        // debug_var($response_arr['response']['body']['totalCount']);
+
+        /// @ api 호출
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        if( isset($response_arr['response']['body']['totalCount'])===true && $response_arr['response']['body']['totalCount']>0)
+        {
+            $items = $response_arr['response']['body']['items']['item'];
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// @ 데이터 입력
+
+            for($i=0;$i<$response_arr['response']['body']['totalCount'];$i++)
+            {
+
+                $arrDBdata = array();
+                $arrDBdata = $items[$i];
+
+                $arrData['tbl_name1']    =   'hospital_103_getMedOftInfo';
+
+                // $arrData['arr_data1']['hmo_103_pk'] = $arrDBdata['hmo_103_pk'];
+                $arrData['arr_data1']['fk_hosp_100_pk'] = $arr_hospital_100['hosp_100_pk'];
+                $arrData['arr_data1']['hmo_103_oftCd'] = $arrDBdata['oftCd'];
+                $arrData['arr_data1']['hmo_103_oftCdNm'] = $arrDBdata['oftCdNm'];
+                $arrData['arr_data1']['hmo_103_oftCnt'] = $arrDBdata['oftCnt'];
+                $arrData['arr_data1']['hmo_103_moddt'] = $exe_datetime;
+
+
+                $this->CI->Hospital_model->insert_hospital_103_getMedOftInfo( $arrData ); // 데이터 입력
+
+                $rtnString = $i;
+            }// end - for
+
+            /// @ 데이터 입력
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }// end - if
+
+
+        return $rtnString;
+
+    }
+
+
+
+
+
+
+}// end - class
 
 ?>
 

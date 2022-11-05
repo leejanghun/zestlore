@@ -1,18 +1,16 @@
 <!-- One -->
 <section id="one">
-	<div class="image main" data-position="center">
-		<img src="images/banner.jpg" alt="" />
-	</div>
-	<div class="container">
-		<header class="major">
-			<h2>병원 상세 정보</h2>
-		</header>
-		<!--<p>병원 정보입니다. 검색이 추가될 예정 입니다. 병원 상세 페이지 예정 입니다.</p>-->
-	</div>
+    <div class="image main" data-position="center">
+        <img src="images/banner.jpg" alt="" />
+    </div>
+    <div class="container">
+        <header class="major">
+            <h2>병원 상세 정보</h2>
+        </header>
+        <!--<p>병원 정보입니다. 검색이 추가될 예정 입니다. 병원 상세 페이지 예정 입니다.</p>-->
+    </div>
 </section>
 
-<!-- 구글 광과 -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4386322349066500" crossorigin="anonymous"></script>
 
 <!-- Five -->
 
@@ -20,189 +18,259 @@
 
 
 
-	<div class="container">
+    <div class="container">
 
-		<h3>{hosp_100_yadmNm}</h3>
+        <h3>{hosp_100_yadmNm}</h3>
 
-		<section>
-			<h4>기본정보</h4>
-			<!--							<h5>Default</h5>-->
-			<div class="table-wrapper">
-				<table>
-					<!--
-										<thead>
-										<tr>
-											<th>no</th>
-											<th>병원명</th>
-											<th>주소</th>
-											<th>연락처</th>
-										</tr>
-										</thead>
-					-->
-					<tbody>
+        <section>
+            <h4>기본정보</h4>
+            <!--							<h5>Default</h5>-->
+            <div class="table-wrapper">
+                <table>
+                    <!--
+                                        <thead>
+                                        <tr>
+                                            <th>no</th>
+                                            <th>병원명</th>
+                                            <th>주소</th>
+                                            <th>연락처</th>
+                                        </tr>
+                                        </thead>
+                    -->
+                    <tbody>
 
-					<tr>
-						<td>주소</td>
-						<td>{hosp_100_addr}</td>
-					</tr>
+                    <tr>
+                        <td>주소</td>
+                        <td>{hosp_100_addr}</td>
+                    </tr>
 
-					<tr>
-						<td>연락처</td>
-						<td>{hosp_100_telno}</td>
-					</tr>
+                    <tr>
+                        <td>연락처</td>
+                        <td><a href="tel:{hosp_100_telno}">{hosp_100_telno}</a></td>
+                    </tr>
 
-					<tr>
-						<td>개설일자</td>
-						<td>{hosp_100_estbDd2}</td>
-					</tr>
+                    <tr>
+                        <td>개설일자</td>
+                        <td>{hosp_100_estbDd2}</td>
+                    </tr>
 
-					<tr>
-						<td>종별코드명</td>
-						<td>{hosp_100_clCdNm}</td>
-					</tr>
+                    <tr>
+                        <td>종별코드명</td>
+                        <td>{hosp_100_clCdNm}</td>
+                    </tr>
 
-					<tr>
-						<td>지도</td>
-						<td><a href="{go_url_naver_map}" target="_blank" class="button primary small">네이버 지도 보기</a></td>
-					</tr>
+                    <tr>
+                        <td>지도</td>
+                        <td><a href="{go_url_naver_map}" target="_blank" class="button primary small">네이버 지도 보기</a></td>
+                    </tr>
 
-					<tr>
-						<td>병원 홈페이지</td>
-						<td><a href="{hosp_100_hospUrl}" target="_blank" >{hosp_100_hospUrl}</a></td>
-					</tr>
+                    <tr>
+                        <td>병원 홈페이지</td>
+                        <td><a href="{hosp_100_hospUrl}" target="_blank" >{hosp_100_hospUrl}</a></td>
+                    </tr>
 
-					<tr>
-						<td>의사 총수</td>
-						<td>{hosp_100_drTotCnt} 명</td>
-					</tr>
+                    <tr>
+                        <td>의사 총수</td>
+                        <td>{hosp_100_drTotCnt} 명</td>
+                    </tr>
 
-					<tr>
-						<td>의과 일반의 인원수</td>
-						<td>{hosp_100_mdeptGdrCnt} 명</td>
-					</tr>
+                    <tr>
+                        <td>의과 일반의 인원수</td>
+                        <td>{hosp_100_mdeptGdrCnt} 명</td>
+                    </tr>
 
-					<tr>
-						<td>의과 인턴 인원수</td>
-						<td>{hosp_100_mdeptIntnCnt} 명</td>
-					</tr>
+                    <tr>
+                        <td>의과 인턴 인원수</td>
+                        <td>{hosp_100_mdeptIntnCnt} 명</td>
+                    </tr>
 
-					<tr>
-						<td>의과 레지던트 인원수</td>
-						<td>{hosp_100_mdeptResdntCnt} 명</td>
-					</tr>
-					<tr>
-						<td>의과 전문의 인원수</td>
-						<td>{hosp_100_mdeptSdrCnt} 명</td>
-					</tr>
-					<tr>
-						<td>치과 일반의 인원수</td>
-						<td>{hosp_100_detyGdrCnt} 명</td>
-					</tr>
-					<tr>
-						<td>치과 인턴 인원수</td>
-						<td>{hosp_100_detyIntnCnt} 명</td>
-					</tr>
-					<tr>
-						<td>치과 레지던트 인원수</td>
-						<td>{hosp_100_detyResdntCnt} 명</td>
-					</tr>
-					<tr>
-						<td>치과 전문의 인원수</td>
-						<td>{hosp_100_detySdrCnt} 명</td>
-					</tr>
-					<tr>
-						<td>한방 일반의 인원수</td>
-						<td>{hosp_100_cmdcGdrCnt} 명</td>
-					</tr>
-					<tr>
-						<td>한방 인턴 인원수</td>
-						<td>{hosp_100_cmdcIntnCnt} 명</td>
-					</tr>
-					<tr>
-						<td>한방 레지던트 인원</td>
-						<td>{hosp_100_cmdcResdntCnt} 명</td>
-					</tr>
-					<tr>
-						<td>한방 전문의 인원수</td>
-						<td>{hosp_100_cmdcSdrCnt} 명</td>
-					</tr>
+                    <tr>
+                        <td>의과 레지던트 인원수</td>
+                        <td>{hosp_100_mdeptResdntCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>의과 전문의 인원수</td>
+                        <td>{hosp_100_mdeptSdrCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>치과 일반의 인원수</td>
+                        <td>{hosp_100_detyGdrCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>치과 인턴 인원수</td>
+                        <td>{hosp_100_detyIntnCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>치과 레지던트 인원수</td>
+                        <td>{hosp_100_detyResdntCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>치과 전문의 인원수</td>
+                        <td>{hosp_100_detySdrCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>한방 일반의 인원수</td>
+                        <td>{hosp_100_cmdcGdrCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>한방 인턴 인원수</td>
+                        <td>{hosp_100_cmdcIntnCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>한방 레지던트 인원</td>
+                        <td>{hosp_100_cmdcResdntCnt} 명</td>
+                    </tr>
+                    <tr>
+                        <td>한방 전문의 인원수</td>
+                        <td>{hosp_100_cmdcSdrCnt} 명</td>
+                    </tr>
 
-					</tbody>
+                    </tbody>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-		</section>
-
-
-		<section class="{display_getEqpInfo}">
-			<h4>병상정보</h4>
-			<div class="table-wrapper">
-				<table>
-					<tbody>
-
-					<tr>
-						<td>일반입원실 상급병상수</td>
-						<td>{hgi_101_hghrSickbdCnt}</td>
-					</tr>
-					<tr>
-						<td>일반입원실 일반병상수</td>
-						<td>{hgi_101_stdSickbdCnt}</td>
-					</tr>
-					<tr>
-						<td>성인중환자 병상수</td>
-						<td>{hgi_101_aduChldSprmCnt}</td>
-					</tr>
-					<tr>
-						<td>신생아중환자 병상수</td>
-						<td>{hgi_101_nbySprmCnt}</td>
-					</tr>
-					<tr>
-						<td>분만실 병상수</td>
-						<td>{hgi_101_partumCnt}</td>
-					</tr>
-					<tr>
-						<td>수술실 병상수</td>
-						<td>{hgi_101_soprmCnt}</td>
-					</tr>
-					<tr>
-						<td>응급실 병상수</td>
-						<td>{hgi_101_emymCnt}</td>
-					</tr>
-					<tr>
-						<td>물리치료실병상수</td>
-						<td>{hgi_101_ptrmCnt}</td>
-					</tr>
-					<tr>
-						<td>소아중환자병상수</td>
-						<td>{hgi_101_chldSprmCnt}</td>
-					</tr>
-					<tr>
-						<td>정신과폐쇄상급 병상수</td>
-						<td>{hgi_101_psydeptClsHigSbdCnt}</td>
-					</tr>
-					<tr>
-						<td>정신과폐쇄일반 병상수</td>
-						<td>{hgi_101_psydeptClsGnlSbdCnt}</td>
-					</tr>
-					<tr>
-						<td>격리실 병상수</td>
-						<td>{hgi_101_isnrSbdCnt}</td>
-					</tr>
-					<tr>
-						<td>무균치료실 병상수</td>
-						<td>{hgi_101_anvirTrrmSbdCnt}</td>
-					</tr>
+        </section>
 
 
-					</tbody>
 
-				</table>
-			</div>
+        <section class="{display_getDgsbjtInfo}">
+            <h4>진료 과목 정보</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>진료과목</th>
+                        <th>의사수</th>
+                        <th>선택진료 의사수</th>
+                    </tr>
+                    </thead>
 
-		</section>
+                    <tbody>
 
-		<a href="{url_go_list}" class="button small">목록</a>
+                    {arr_getDgsbjtInfo_list}
+                    <tr>
+                        <td>{hd_102_dgsbjtCdNm}</td>
+                        <td>{hd_102_dgsbjtPrSdrCnt}</td>
+                        <td>{hd_102_cdiagDrCnt}</td>
+                    </tr>
+                    {/arr_getDgsbjtInfo_list}
 
-	</div>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+
+
+        <section class="{display_getDgsbjtInfo}">
+            <h4>의료장비 정보</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>장비명</th>
+                        <th>보유대수</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {arr_getMedOftInfo_list}
+                    <tr>
+                        <td>{hmo_103_oftCdNm}</td>
+                        <td>{hmo_103_oftCnt}</td>
+                    </tr>
+                    {/arr_getMedOftInfo_list}
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+
+
+        <section class="{display_getEqpInfo}">
+            <h4>병상정보</h4>
+            <div class="table-wrapper">
+                <table>
+                    <tbody>
+
+                    <tr>
+                        <td>일반입원실 상급병상수</td>
+                        <td>{hgi_101_hghrSickbdCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>일반입원실 일반병상수</td>
+                        <td>{hgi_101_stdSickbdCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>성인중환자 병상수</td>
+                        <td>{hgi_101_aduChldSprmCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>신생아중환자 병상수</td>
+                        <td>{hgi_101_nbySprmCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>분만실 병상수</td>
+                        <td>{hgi_101_partumCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>수술실 병상수</td>
+                        <td>{hgi_101_soprmCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>응급실 병상수</td>
+                        <td>{hgi_101_emymCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>물리치료실병상수</td>
+                        <td>{hgi_101_ptrmCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>소아중환자병상수</td>
+                        <td>{hgi_101_chldSprmCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>정신과폐쇄상급 병상수</td>
+                        <td>{hgi_101_psydeptClsHigSbdCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>정신과폐쇄일반 병상수</td>
+                        <td>{hgi_101_psydeptClsGnlSbdCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>격리실 병상수</td>
+                        <td>{hgi_101_isnrSbdCnt}</td>
+                    </tr>
+                    <tr>
+                        <td>무균치료실 병상수</td>
+                        <td>{hgi_101_anvirTrrmSbdCnt}</td>
+                    </tr>
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+
+
+
+
+
+        <a href="{url_go_list}" class="button small">목록</a>
+
+    </div>
 </section>
+
+
+<!-- 구글 광고 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4386322349066500" crossorigin="anonymous"></script>
