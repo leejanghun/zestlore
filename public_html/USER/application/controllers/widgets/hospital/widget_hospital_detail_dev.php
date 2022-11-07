@@ -296,6 +296,7 @@ class Widget_hospital_detail_dev extends Widget {
 
             }
 
+
         }// end - if(1)
 
         /// @ 상세데이터 - 의료기관의 장비코드에 따른 장비 대수 등 의료장비정보 제공
