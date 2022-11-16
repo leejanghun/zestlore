@@ -152,8 +152,6 @@ class Datagokr_api_default extends CI_Controller {
 
 
 		debug_var("실행금지"); exit;// 실행금지
-
-
 		debug_var("두번 실행금지"); exit;// 두번 실행금지
 
 		//print_r($this->is_cli_request());exit;
@@ -218,11 +216,13 @@ class Datagokr_api_default extends CI_Controller {
 //		$api_tot_cnt = ($response_arr['response']['body']['totalCount']);
 
 		$api_tot_cnt = 76067; // 데이터 총카운트
+		$api_tot_cnt = 1; // 데이터 총카운트
 
 		/////////////////////////////////////////////////////////////////////////////////////
 		/// 반복횟수 구하기
 
 		$one_time_cnt = 1000; // 한번에 처리할 데이터수
+		$one_time_cnt = 1; // 한번에 처리할 데이터수
 		$exe_cnt = (int)($api_tot_cnt/$one_time_cnt)+1; // 반복횟수
 
 		/// 반복횟수 구하기
@@ -256,6 +256,8 @@ class Datagokr_api_default extends CI_Controller {
 
 			$response_arr = json_decode($response,true);
 
+
+			debug_var($response_arr);exit;
 
 			$item_list = $response_arr['response']['body']['items']['item'];
 			$numOfRows = count($response_arr['response']['body']['items']['item']);

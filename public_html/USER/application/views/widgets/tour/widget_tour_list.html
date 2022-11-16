@@ -1,0 +1,132 @@
+<!-- One -->
+<section id="one">
+	<div class="image main" data-position="center">
+		<img src="images/banner.jpg" alt="" />
+	</div>
+	<div class="container">
+		<header class="major">
+			<h2>관광 목록</h2>
+		</header>
+		<p>관광 정보 입니다.</p>
+	</div>
+</section>
+
+<!-- Five -->
+
+<section id="five">
+
+
+
+	<div class="container">
+
+		<section>
+			<h4>검색</h4>
+			<div class="row gtr-uniform">
+				<div class="col-4 col-12-xsmall">
+					<select name="FILTER_FIELD_NAME" id="FILTER_FIELD_NAME">{html_sch_select_box}</select>
+				</div>
+				<div class="col-4 col-12-xsmall">
+					<input type="text" name="FILTER_FIELD_VALUE" id="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}" placeholder="키워드" />
+				</div>
+				<div class="col-4 col-12-xsmall">
+					<input id="btn_sarch_submit" type="button" value="검색" />
+				</div>
+
+			</div>
+		</section>
+
+		<h3>total : {total_record}</h3>
+		<!--
+					<br>
+					<section>
+						{arr_recordList}
+						<header>
+						<h4>{hosp_100_yadmNm}</h4>
+						<p>{hosp_100_addr}
+							<br>{hosp_100_telno}</p>
+						{/arr_recordList}
+						</header>
+					</section>
+		-->
+
+
+		<section>
+			<!--				<h4>Table</h4>-->
+			<!--				<h5>Default</h5>-->
+			<div class="table-wrapper">
+				<table>
+					<thead>
+					<tr>
+						<th>no</th>
+
+						<th>제목</th>
+<!--						<th>주소</th>-->
+					</tr>
+					</thead>
+					<tbody>
+					{arr_recordList}
+					<tr>
+						<td>{record_no}</td>
+
+						<td><img src="{tour_image}" width="140px;">&nbsp;&nbsp;<a href="{detail_url}">{tour_200_title}</a></td>
+<!--						<td>{tour_200_addr1}</td>-->
+
+					</tr>
+					{/arr_recordList}
+					</tbody>
+					<tfoot>
+					<tr>
+						<td colspan="3"><div class="pagination">{pageNumber}</div></td>
+
+					</tr>
+					</tfoot>
+				</table>
+			</div>
+
+
+		</section>
+
+
+
+	</div>
+</section>
+
+
+<input type="hidden"  id="url_go_list"    value="{url_go_list}" >
+
+
+<script>
+
+	jQuery(document).on("click","#btn_sarch_submit",function () {
+
+		let goUrl	=   "";
+
+		let arr_search_field_list   =   new Array(
+			'FILTER_FIELD_NAME'
+			,'FILTER_FIELD_VALUE'
+		);
+
+		goUrl	=	jQuery("#url_go_list").val();
+		let loopCnt1 = 0;
+		for(loopCnt1=0; arr_search_field_list.length>loopCnt1; loopCnt1++)
+		{
+			console.log( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+			if( jQuery("#" + arr_search_field_list[loopCnt1] ).val().length > 0 )
+			{
+				if(loopCnt1==0)
+				{
+					goUrl	=	goUrl + "?" + arr_search_field_list[loopCnt1];
+				}
+				else
+				{
+					goUrl	=	goUrl + "&" + arr_search_field_list[loopCnt1];
+				}
+
+				goUrl	=	goUrl + "=" + encodeURIComponent( jQuery("#" + arr_search_field_list[loopCnt1] ).val() );
+			}// end if
+		}// end for
+		window.location.href	=	goUrl;
+	})
+
+
+</script>
