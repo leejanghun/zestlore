@@ -5,7 +5,7 @@
 	</div>
 	<div class="container">
 		<header class="major">
-			<h2>관광 상세 정보</h2>
+			<h2>Detalles de turismo</h2>
 		</header>
 		<!--<p>병원 정보입니다. 검색이 추가될 예정 입니다. 병원 상세 페이지 예정 입니다.</p>-->
 	</div>
@@ -20,42 +20,42 @@
 
 	<div class="container">
 
-		<h3>{tour_200_title}</h3>
+		<h3>{tourSp_500_title}</h3>
 
 		<section>
-			<h4>기본정보</h4>
+			<h4>Plantilla:Ficha de base</h4>
 			<!--							<h5>Default</h5>-->
 			<div class="table-wrapper">
 				<table>
 					<tbody>
 
 					<tr>
-						<td>이미지</td>
+						<td>Imágenes</td>
 						<td><img src="{tour_image}"></td>
 					</tr>
 
 					<tr>
-						<td>소개</td>
-						<td>{tour_200_detailCommon_overview}</td>
+						<td>introducción</td>
+						<td>{tourSp_500_detailCommon_overview}</td>
 					</tr>
 
-<!--
+					<!--
+
+										<tr>
+											<td>연락처</td>
+											<td><a href="tel:{tourSp_500_tel}">{tourSp_500_tel}</a></td>
+										</tr>
+
+					-->
 
 					<tr>
-						<td>연락처</td>
-						<td><a href="tel:{tour_200_tel}">{tour_200_tel}</a></td>
+						<td>mapa</td>
+						<td><a href="{go_url_naver_map}" target="_blank" class="button primary small">Ver mapas de Naver</a></td>
 					</tr>
 
--->
-
 					<tr>
-						<td>지도</td>
-						<td><a href="{go_url_naver_map}" target="_blank" class="button primary small">네이버 지도 보기</a></td>
-					</tr>
-
-					<tr>
-						<td>주소</td>
-						<td>{tour_200_addr1}</td>
+						<td>En la dirección.</td>
+						<td>{tourSp_500_addr1}</td>
 					</tr>
 
 
@@ -68,7 +68,7 @@
 
 
 
-		<a href="{url_go_list}" class="button small">목록</a>
+		<a href="{url_go_list}" class="button small">Lista de personas</a>
 
 	</div>
 </section>

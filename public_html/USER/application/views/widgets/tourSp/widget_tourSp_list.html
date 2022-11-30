@@ -5,9 +5,9 @@
 	</div>
 	<div class="container">
 		<header class="major">
-			<h2>관광 목록</h2>
+			<h2>catálogo de turismo</h2>
 		</header>
-		<p>관광 정보 입니다.</p>
+		<p>Información turística.</p>
 	</div>
 </section>
 
@@ -20,16 +20,16 @@
 	<div class="container">
 
 		<section>
-			<h4>검색</h4>
+			<h4>Search</h4>
 			<div class="row gtr-uniform">
 				<div class="col-4 col-12-xsmall">
 					<select name="FILTER_FIELD_NAME" id="FILTER_FIELD_NAME">{html_sch_select_box}</select>
 				</div>
 				<div class="col-4 col-12-xsmall">
-					<input type="text" name="FILTER_FIELD_VALUE" id="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}" placeholder="키워드" />
+					<input type="text" name="FILTER_FIELD_VALUE" id="FILTER_FIELD_VALUE" value="{FILTER_FIELD_VALUE}" placeholder="Keyword" />
 				</div>
 				<div class="col-4 col-12-xsmall">
-					<input id="btn_sarch_submit" type="button" value="검색" />
+					<input id="btn_sarch_submit" type="button" value="Search" />
 				</div>
 
 			</div>
@@ -59,8 +59,8 @@
 					<tr>
 						<th>no</th>
 
-						<th>제목</th>
-<!--						<th>주소</th>-->
+						<th>título</th>
+						<!--						<th>주소</th>-->
 					</tr>
 					</thead>
 					<tbody>
@@ -70,9 +70,9 @@
 
 						<td>
 							<img src="{tour_image}" width="140px;">
-							<br><a href="{detail_url}">{tour_200_title}</a>
+							<br><a href="{detail_url}">{tourSp_500_title}</a>
 						</td>
-<!--						<td>{tour_200_addr1}</td>-->
+						<!--						<td>{tourSp_500_addr1}</td>-->
 
 					</tr>
 					{/arr_recordList}

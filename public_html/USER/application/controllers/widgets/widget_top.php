@@ -63,16 +63,25 @@ class widget_top extends Widget
 				break;
 
 
-			// 관광
+			// 관광 - 한국어
 			case "TOUR_DEFAULT":
 				$arr_VARIABLE_DATA['TOUR_INFO_ACTIVE']   =   "active";
 				break;
 
-			// 관광
+			// 관광 - 영어
 			case "TOUREN_DEFAULT":
 				$arr_VARIABLE_DATA['TOUREN_INFO_ACTIVE']   =   "active";
 				break;
 
+			// 관광 - 일어
+			case "TOURJP_DEFAULT":
+				$arr_VARIABLE_DATA['TOURJP_INFO_ACTIVE']   =   "active";
+				break;
+
+			// 관광 - 스페인
+			case "TOURSP_DEFAULT":
+				$arr_VARIABLE_DATA['TOURSP_INFO_ACTIVE']   =   "active";
+				break;
 
 			/*	예제
 
@@ -138,6 +147,15 @@ class widget_top extends Widget
 		// 관광 영문 목록
 		$arr_VARIABLE_DATA['url_go_top_tourEn']   =   $arr_VARIABLE_DATA['siteURL'];
 		$arr_VARIABLE_DATA['url_go_top_tourEn']   .=  "index.php/tourEn_default/tourEn_list";
+
+
+		// 관광 일어 목록
+		$arr_VARIABLE_DATA['url_go_top_tourJp']   =   $arr_VARIABLE_DATA['siteURL'];
+		$arr_VARIABLE_DATA['url_go_top_tourJp']   .=  "index.php/tourJp_default/tourJp_list";
+
+		// 관광 스페인 목록
+		$arr_VARIABLE_DATA['url_go_top_tourSp']   =   $arr_VARIABLE_DATA['siteURL'];
+		$arr_VARIABLE_DATA['url_go_top_tourSp']   .=  "index.php/tourSp_default/tourSp_list";
 
 
 		/// @ 버튼 링크
